@@ -24,7 +24,7 @@ function loadDiskSpace() {
                 if (isNaN(percentageUsed)) {
                     return true;
                 }
-                var title = $('<h5>').html(disk + ':');
+                var title = $('<h5>').html(disk);
                 $('#hdd-info').append(title);
                 var subTitle = $('<h6>').html(Math.round(percentageUsed) + '%, ' + bytesToSize(bytesUsed, 2) + '  / ' + bytesToSize(info.TOTAL_DISK_SPACE, 2));
                 $('#hdd-info').append(subTitle);
