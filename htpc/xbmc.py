@@ -40,12 +40,13 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
         fileData = fileObject.read()
 
+        fileIn = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '_original.png'
+        fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
+
         # save original
-        f = open(thumbOnDisk, 'wb')
+        f = open(fileIn, 'wb')
         f.write(fileData)
         f.close()
-
-        fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
 
         # Resize windows
         if platform.system() == 'Windows':
@@ -54,7 +55,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
             height = int(thumbHeight)
             image = FIPY.Image()
             try:
-                image.load(fileName=thumbOnDisk)
+                image.load(fileName=fileIn)
                 image.resize(size=(width,height), filter=5)
                 image.save(fileName=fileOut)
             except:
@@ -62,19 +63,19 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         # resize osx
         elif platform.system() == 'Darwin':
             try:
-                subprocess.call(['sips', '-z', thumbHeight, thumbWidth, thumbOnDisk, '--out', fileOut])
+                subprocess.call(['sips', '-z', thumbHeight, thumbWidth, fileIn, '--out', fileOut])
             except:
                 pass
         # resize linux
         else:
             try:
-                subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
+                subprocess.call(['convert', fileIn, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
             except:
                 pass
 
         # remove original
         try:
-            os.unlink(thumbOnDisk)
+            os.unlink(fileIn)
         except:
             pass
 
