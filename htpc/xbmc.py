@@ -8,17 +8,8 @@ import base64
 import cherrypy
 import os
 import htpc
-import sys
-
-is_64bits = sys.maxsize > 2**32
-
-if is_64bits:
-    from PIL64 import Image
-    from PIL64 import ImageEnhance
-else:
-    from PIL import Image
-    from PIL import ImageEnhance
-
+import platform
+import subprocess
 
 def xbmcFetchDataFromUrl(url):
     try:
@@ -49,38 +40,55 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
         fileData = fileObject.read()
 
-        # Thumbnail opslaan
+        # save original
         f = open(thumbOnDisk, 'wb')
         f.write(fileData)
         f.close()
 
-        # Plaatje resizen
-        thumbOpacity = float(thumbOpacity)
-        enhanceOpacity = (thumbOpacity / 100)
+        fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
 
-        width = int(thumbWidth)
-        height = int(thumbHeight)
-        image = Image.open(thumbOnDisk)
-        newimage = image.resize((width, height), Image.ANTIALIAS).convert('RGBA')
-        alpha = newimage.split()[3]
-        alpha = ImageEnhance.Brightness(alpha).enhance(enhanceOpacity)
-        newimage.putalpha(alpha)
-        newimage.save(thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png')
+        # Resize windows
+        if platform.system() == 'Windows':
+            import FreeImagePy as FIPY
+            width = int(thumbWidth)
+            height = int(thumbHeight)
+            image = FIPY.Image()
+            try:
+                image.load(fileName=thumbOnDisk)
+                image.resize(size=(width,height), filter=5)
+                image.save(fileName=fileOut)
+            except:
+                pass
+        # resize osx
+        elif platform.system() == 'Darwin':
+            try:
+                subprocess.call(['spis', '-z', thumbWidth, thumbHeight, thumbOnDisk, '--out', fileOut])
+            except:
+                pass
+        # resize linux
+        else:
+            try:
+                subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight + '\\!', fileOut])
+            except:
+                pass
 
-        # Oude weg gooien
+        # remove original
         try:
             os.unlink(thumbOnDisk)
         except:
             pass
 
     # Plaatje weer uitlezen
-    f = open(thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png', 'rb')
-    data = f.read()
-    f.close()
+    try:
+        f = open(thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png', 'rb')
+        data = f.read()
+        f.close()
+        # Header setten en data returnen
+        cherrypy.response.headers['Content-Type'] = "image/png"
+        return data
+    except:
+        pass
 
-    # Header setten en data returnen
-    cherrypy.response.headers['Content-Type'] = "image/png"
-    return data
 
 def xbmcMakeUrl():
     config = readSettings()

@@ -31,8 +31,10 @@
         <a href="javascript:void(0);" class="close" data-dismiss="modal">&times;</a>
         <h3 class="modal-h3"></h3>
     </div>
-    <div class="modal-body">
-        
+    <div class="modal-fanart">
+        <div class="modal-body">
+
+        </div>
     </div>
     <div class="modal-footer">
         <a href="javascript:void(0);" class="btn secondary">Close</a>

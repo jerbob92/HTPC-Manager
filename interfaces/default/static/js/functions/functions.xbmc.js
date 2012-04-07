@@ -61,6 +61,8 @@ function loadMovies(options) {
                 var movieAnchor = $('<a>');
                 movieAnchor.addClass('thumbnail');
                 movieAnchor.attr('href', 'javascript:void(0);');
+                movieAnchor.css('height', '150px');
+                movieAnchor.css('width', '100px');
                 movieAnchor.append(moviePicture);
 
                 movieAnchor.click(function () {
@@ -118,10 +120,12 @@ function xbmcShowMovie(movie) {
     })
 
     // Achtergrondje maken
-    table.parent().css({
-        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&w=675&h=400&o=15) top center',
-        'background-size' : '100%;'
+    $('.modal-fanart').css({
+        'background-size' : '100%;',
+        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&w=675&h=400&o=15) top center'
     });
+    table.parent().addClass('trans');
+
 }
 
 // shows inladen
@@ -191,6 +195,13 @@ function loadXbmcShows(options) {
                 var showAnchor = $('<a>');
                 showAnchor.addClass('thumbnail');
                 showAnchor.attr('href', 'javascript:void(0);');
+                if ($('#show-grid').hasClass('banners')) {
+                    showAnchor.css('height', '90px');
+                    showAnchor.css('width', '500px');
+                } else {
+                    showAnchor.css('height', '150px');
+                    showAnchor.css('width', '100px');
+                }
                 showAnchor.append(showPicture);
                 showAnchor.click(function () {
                     loadXBMCShow(show);
@@ -251,10 +262,11 @@ function xbmcShowEpisode(episode) {
     })
 
     // Achtergrondje maken
-    table.parent().css({
-        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&w=675&h=400&o=15) top center',
-        'background-size' : '100%;'
+    $('.modal-fanart').css({
+        'background-size' : '100%;',
+        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&w=675&h=400&o=15) top center'
     });
+    table.parent().addClass('trans');
 }
 
 function loadXBMCShow(show) {
@@ -413,12 +425,14 @@ function loadNowPlaying() {
 
                 nowPlayingThumb = data.itemInfo.item.thumbnail;
 
+                // Achtergrondje maken
                 $('#nowplaying').css({
                     'background' : 'url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(data.itemInfo.item.fanart) + '&w=1150&h=640&o=10) top center',
                     'background-size' : '100%;',
                     'background-position' : '50% 20%',
                     'margin-bottom' : '10px'
                 });
+                $('#nowplaying-fanart').addClass('trans');
 
                 // Line
                 $('<hr />').insertAfter('#nowplaying');

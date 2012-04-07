@@ -65,9 +65,8 @@ $(document).ready(function () {
     });
 
     $('#modal_dialog').on('hidden', function () {
-        $('#modal_dialog .modal-body').css({
-            background : '#ffffff'
-        });
+        $('#modal_dialog .trans').removeClass('trans');
+        $('#modal_dialog .modal-fanart').css('background', '#ffffff');
     })
 
 });
