@@ -85,6 +85,7 @@ function loadMovies(options) {
 }
 
 function xbmcShowMovie(movie) {
+
     // Maak inhoud van modal
     var modalMoviePicture = $('<img>');
     modalMoviePicture.css('height', '300px');

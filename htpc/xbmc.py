@@ -1,5 +1,6 @@
 from jsonrpclib import Server
 from settings import readSettings
+from settings import saveSettings
 from json import dumps
 
 import urllib2
@@ -22,14 +23,17 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
     thumbParts = thumb.split('/')
     thumbFile = thumbParts.pop()
+    thumbType = thumbParts.pop()
 
     xbmc_thumbs = os.path.join(htpc.userdata, 'xbmc_thumbs/')
     if not os.path.isdir(xbmc_thumbs):
         os.makedirs(xbmc_thumbs)
 
-    thumbOnDisk = os.path.join(xbmc_thumbs, thumbFile)
-    if not os.path.isfile(thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'):
+    thumbOnDisk = os.path.join(xbmc_thumbs, thumbType + '_' + thumbFile)
+    fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
 
+    # If there is no local copy
+    if not os.path.isfile(thumbOnDisk):
         config = readSettings()
         url = 'http://' + config.get('xbmc_ip') + ':' + str(config.get('xbmc_port')) + '/vfs/' + thumb
 
@@ -39,49 +43,65 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         fileObject = urllib2.urlopen(request)
 
         fileData = fileObject.read()
-
-        fileIn = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '_original.png'
-        fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
-
-        # save original
-        f = open(fileIn, 'wb')
+        f = open(thumbOnDisk, 'wb')
         f.write(fileData)
         f.close()
 
-        # Resize windows
-        if platform.system() == 'Windows':
-            import FreeImagePy as FIPY
-            width = int(thumbWidth)
-            height = int(thumbHeight)
-            image = FIPY.Image()
-            try:
-                image.load(fileName=fileIn)
-                image.resize(size=(width,height), filter=5)
-                image.save(fileName=fileOut)
-            except:
-                pass
-        # resize osx
-        elif platform.system() == 'Darwin':
-            try:
-                subprocess.call(['sips', '-z', thumbHeight, thumbWidth, fileIn, '--out', fileOut])
-            except:
-                pass
-        # resize linux
-        else:
-            try:
-                subprocess.call(['convert', fileIn, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
-            except:
-                pass
+    # if there is no resized version
+    if not os.path.isfile(fileOut):
 
-        # remove original
+        widthInt = int(thumbWidth)
+        heightInt = int(thumbHeight)
+        imageResized = False
+
+        # Resize windows and linux with freeimage (dunno if it can exist on mac?)
         try:
-            os.unlink(fileIn)
+            pass
+            import FreeImagePy
+            image = FreeImagePy.Image()
+            image.load(fileName=thumbOnDisk)
+            image.resize(size=(widthInt,heightInt), filter=5)
+            image.save(fileName=fileOut)
+            imageResized = True
         except:
             pass
 
-    # Plaatje weer uitlezen
+        # resize osx
+        if platform.system() == 'Darwin' and not imageResized:
+            try:
+                subprocess.call(['sips', '-z', thumbHeight, thumbWidth, thumbOnDisk, '--out', fileOut])
+                imageResized = True
+            except:
+                pass
+
+        if platform.system() != 'Windows' and not imageResized:
+            # resize with imagemagick
+            try:
+                subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
+                imageResized = True
+            except:
+                pass
+
+        # resize PIL (for like openelec etc.)
+        if not imageResized:
+            try:
+                from PIL import Image
+                from PIL import ImageEnhance
+                image = Image.open(thumbOnDisk)
+                newimage = image.resize((widthInt, heightInt), Image.ANTIALIAS).convert('RGBA')
+                newimage.save(fileOut)
+            except:
+                pass
+
+    # If the image got resized fetch the resized one otherwise use the copy
+    # This is just a fallback (it makes the browser slow)
     try:
-        f = open(thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png', 'rb')
+        if os.path.isfile(fileOut):
+            f = open(fileOut, 'rb')
+            saveSettings({'noresizer_found' : 0})
+        else:
+            f = open(thumbOnDisk, 'rb')
+            saveSettings({'noresizer_found' : 1})
         data = f.read()
         f.close()
         # Header setten en data returnen
@@ -89,7 +109,6 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         return data
     except:
         pass
-
 
 def xbmcMakeUrl():
     config = readSettings()
