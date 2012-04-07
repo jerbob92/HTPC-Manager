@@ -68,7 +68,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         # resize linux
         else:
             try:
-                subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight + '\\!', fileOut])
+                subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
             except:
                 pass
 
