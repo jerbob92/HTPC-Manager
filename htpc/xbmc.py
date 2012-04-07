@@ -62,7 +62,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         # resize osx
         elif platform.system() == 'Darwin':
             try:
-                subprocess.call(['spis', '-z', thumbWidth, thumbHeight, thumbOnDisk, '--out', fileOut])
+                subprocess.call(['sips', '-z', thumbHeight, thumbWidth, thumbOnDisk, '--out', fileOut])
             except:
                 pass
         # resize linux
