@@ -98,10 +98,14 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
     try:
         if os.path.isfile(fileOut):
             f = open(fileOut, 'rb')
-            saveSettings({'noresizer_found' : 0})
+            settings = readSettings()
+            settings['noresizer_found'] = 0
+            saveSettings(settings)
         else:
             f = open(thumbOnDisk, 'rb')
-            saveSettings({'noresizer_found' : 1})
+            settings = readSettings()
+            settings['noresizer_found'] = 0
+            saveSettings(settings)
         data = f.read()
         f.close()
         # Header setten en data returnen
