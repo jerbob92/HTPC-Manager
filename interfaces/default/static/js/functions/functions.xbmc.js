@@ -121,8 +121,8 @@ function xbmcShowMovie(movie) {
 
     // Achtergrondje maken
     $('.modal-fanart').css({
-        'background-size' : '100%;',
-        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&w=675&h=400&o=15) top center'
+        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&w=675&h=400&o=15) top center no-repeat',
+        'background-size' : '100%'
     });
     table.parent().addClass('trans');
 
@@ -263,8 +263,8 @@ function xbmcShowEpisode(episode) {
 
     // Achtergrondje maken
     $('.modal-fanart').css({
-        'background-size' : '100%;',
-        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&w=675&h=400&o=15) top center'
+        'background' : '#ffffff url(json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&w=675&h=400&o=15) top center',
+        'background-size' : '100%;'
     });
     table.parent().addClass('trans');
 }
