@@ -434,8 +434,6 @@ function loadNowPlaying() {
                 });
                 $('#nowplaying-fanart').addClass('trans');
 
-                // Line
-                $('<hr />').insertAfter('#nowplaying');
             }
 
             // Play button
