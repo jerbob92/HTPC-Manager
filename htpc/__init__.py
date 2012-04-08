@@ -88,6 +88,11 @@ class pageHandler:
         template.jsfile = 'settings.js'
         template.submenu = 'settings'
 
+        template.noresizer_found = 0
+        noresizeridentifier = os.path.join(htpc.userdata, 'no_resizer_found');
+        if os.path.isfile(noresizeridentifier):
+            template.noresizer_found = 1
+
         return template.respond()
 
     @cherrypy.expose()

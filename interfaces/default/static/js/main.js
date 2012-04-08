@@ -59,6 +59,10 @@ function loadRecentMovies () {
                 var itemImage = $('<img>');
                 itemImage.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&h=240&w=430');
                 itemImage.attr('alt', movie.title);
+                itemImage.css({
+                    width: '430px',
+                    height: '240px'
+                });
 
                 var itemTitle = $('<h4>');
                 itemTitle.html(movie.title);
@@ -78,6 +82,9 @@ function loadRecentMovies () {
                 itemDiv.append(itemImage);
                 itemDiv.append(itemCaption);
 
+                $('#movie-carousel').css({
+                    height: '240px'
+                });
                 $('#movie-carousel').show();
                 $('#movie-carousel .carousel-inner').append(itemDiv);
 
@@ -107,6 +114,11 @@ function loadRecentTVshows () {
                 var itemImage = $('<img>');
                 itemImage.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&h=240&w=430');
                 itemImage.attr('alt', epTitle);
+                itemImage.css({
+                    width: '430px',
+                    height: '240px'
+                });
+
                 var itemTitle = $('<h4>');
                 itemTitle.html(epTitle);
                 var itemPlot = $('<p>');
@@ -124,6 +136,9 @@ function loadRecentTVshows () {
                 itemDiv.append(itemImage);
                 itemDiv.append(itemCaption);
 
+                $('#tvshow-carousel').css({
+                    height: '240px'
+                });
                 $('#tvshow-carousel').show();
                 $('#tvshow-carousel .carousel-inner').append(itemDiv);
 
