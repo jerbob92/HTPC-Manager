@@ -1,8 +1,7 @@
-from array import array
 import os
+from posix import popen
 import string
 import sys
-import subprocess
 from json import dumps
 
 class spaceType:
@@ -35,6 +34,8 @@ class reader:
 
     def getDriveInfo(self):
         retval = {}
+
+        # Windows
         if sys.platform == "win32":
             # http://msdn.microsoft.com/en-us/library/windows/desktop/aa364972%28v=vs.85%29.aspx
             drives = []
@@ -43,21 +44,34 @@ class reader:
                 if bitmask & 1:
                     retval[letter] = self.getFreeSpace(letter + ':');
                 bitmask >>= 1
-        else:
+
+        # OSX
+        if sys.platform == "darwin":
+            df = subprocess.Popen(["df", "-kl"], stdout=subprocess.PIPE)
+            output = df.communicate()[0]
+            output = output.split("\n")
+            for out in output:
+                parts = out.split()
+                try:
+                    retval[parts[0]] = self.getFreeSpace(parts[0], parts)
+                except:
+                    pass
+
+        # Linux
+        if sys.platform == "linux2":
             df = subprocess.Popen(["df"], stdout=subprocess.PIPE)
             output = df.communicate()[0]
             output = output.split("\n")
             for out in output:
                 parts = out.split()
                 try:
-                    retval[parts[4]] = self.getFreeSpace(parts[4]);
+                    retval[parts[4]] = self.getFreeSpace(parts[4])
                 except:
                     pass
 
         return dumps(retval)
 
-    def getFreeSpace(self, path = '/'):
-        #retval = array('d')
+    def getFreeSpace(self, path = '/', data = {}):
         retval = {}
         if sys.platform == "win32":
             if(path == '/'):
@@ -83,8 +97,11 @@ class reader:
                 retval[spaceType.TOTAL_DISK_SPACE] = n_total.value
                 retval[spaceType.TOTAL_FREE] = n_free.value
         else:
-            status = os.statvfs(path)
-            retval[spaceType.FREE_FOR_USER] = (status[statvfs.F_BAVAIL] * status[statvfs.F_FRSIZE])
-            retval[spaceType.TOTAL_DISK_SPACE]  = (status[statvfs.F_BLOCKS] * status[statvfs.F_FRSIZE])
-            retval[spaceType.TOTAL_FREE] = (status[statvfs.F_BFREE] * status[statvfs.F_FRSIZE])
-        return retval
+            if os.statvfs(path):
+                print data
+                retval[spaceType.FREE_FOR_USER] = (int(data[3]) * 1024)
+                retval[spaceType.TOTAL_DISK_SPACE]  = (int(data[1]) * 1024)
+                retval[spaceType.TOTAL_FREE] = (int(data[3]) * 1024)
+            #print retval
+            return retval
+
