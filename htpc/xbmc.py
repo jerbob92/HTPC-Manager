@@ -104,7 +104,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         else:
             f = open(thumbOnDisk, 'rb')
             settings = readSettings()
-            settings['noresizer_found'] = 0
+            settings['noresizer_found'] = 1
             saveSettings(settings)
         data = f.read()
         f.close()
