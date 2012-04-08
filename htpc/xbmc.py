@@ -68,6 +68,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
             image.resize(size=(widthInt,heightInt), filter=5)
             image.save(fileName=fileOut)
             imageResized = True
+            print 'Used FreeImage'
         except:
             pass
 
@@ -76,6 +77,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
             try:
                 subprocess.call(['sips', '-z', thumbHeight, thumbWidth, thumbOnDisk, '--out', fileOut])
                 imageResized = True
+                print 'Used sips'
             except:
                 pass
 
@@ -84,6 +86,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
             try:
                 subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
                 imageResized = True
+                print 'Used ImageMagick'
             except:
                 pass
 
@@ -93,6 +96,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
                 image = Image.open(thumbOnDisk)
                 newimage = image.resize((widthInt, heightInt), Image.ANTIALIAS).convert('RGBA')
                 newimage.save(fileOut)
+                print 'Used PIL'
             except:
                 pass
 
