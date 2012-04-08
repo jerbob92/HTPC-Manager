@@ -18,14 +18,15 @@ def saveSettings(data, section = 'htpc'):
     with open(htpc.settingsfile, 'w') as configfile:
         config.write(configfile)
 
-def readSettings():
+def readSettings(section='htpc'):
     if not os.path.isfile(htpc.settingsfile):
         return {}
     else:
-
         config = ConfigParser.ConfigParser()
+        if not config.has_section(section):
+            config.add_section(section)
         config.read(htpc.settingsfile)
-        items = config.items('htpc')
+        items = config.items(section)
 
         toReturn = {}
         for key, val in items:

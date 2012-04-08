@@ -8,7 +8,7 @@
             <h1>Settings</h1>
         </div>
 
-        #if $getVar('noresizer_found', '0') == "1"
+        #if $getVar('noresizer_found', 0) == 1
         <div class="alert alert-block"><strong>Warning: </strong>Failed to resize thumbnails. This can be slow on some browsers. For more information and a solution on how to fix this visit <a href="http://htpcmanager.org/#faq" target="_blank">http://htpcmanager.org/#faq</a></div>
         #end if
 

@@ -1,6 +1,5 @@
 from jsonrpclib import Server
-from settings import readSettings
-from settings import saveSettings
+from settings import *
 from json import dumps
 
 import urllib2
@@ -95,24 +94,23 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
     # If the image got resized fetch the resized one otherwise use the copy
     # This is just a fallback (it makes the browser slow)
-    try:
-        if os.path.isfile(fileOut):
-            f = open(fileOut, 'rb')
-            settings = readSettings()
-            settings['noresizer_found'] = 0
-            saveSettings(settings)
-        else:
-            f = open(thumbOnDisk, 'rb')
-            settings = readSettings()
-            settings['noresizer_found'] = 1
-            saveSettings(settings)
-        data = f.read()
-        f.close()
-        # Header setten en data returnen
-        cherrypy.response.headers['Content-Type'] = "image/png"
-        return data
-    except:
-        pass
+    noresizeridentifier = os.path.join(htpc.userdata, 'no_resizer_found');
+    if os.path.isfile(fileOut):
+        f = open(fileOut, 'rb')
+        try:
+            os.unlink(noresizeridentifier)
+        except:
+            pass
+    else:
+        f = open(thumbOnDisk, 'rb')
+        nf = open(noresizeridentifier, 'w')
+        nf.write('1')
+        nf.close()
+    data = f.read()
+    f.close()
+    # Header setten en data returnen
+    cherrypy.response.headers['Content-Type'] = "image/png"
+    return data
 
 def xbmcMakeUrl():
     config = readSettings()
