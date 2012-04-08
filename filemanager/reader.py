@@ -1,5 +1,4 @@
 import os
-from posix import popen
 import string
 import sys
 from json import dumps
@@ -47,6 +46,7 @@ class reader:
 
         # OSX
         if sys.platform == "darwin":
+            from posix import popen
             df = subprocess.Popen(["df", "-kl"], stdout=subprocess.PIPE)
             output = df.communicate()[0]
             output = output.split("\n")
@@ -103,5 +103,5 @@ class reader:
                 retval[spaceType.TOTAL_DISK_SPACE]  = (int(data[1]) * 1024)
                 retval[spaceType.TOTAL_FREE] = (int(data[3]) * 1024)
             #print retval
-            return retval
+        return retval
 
