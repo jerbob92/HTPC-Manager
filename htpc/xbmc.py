@@ -35,7 +35,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         os.makedirs(xbmc_thumbs)
 
     thumbOnDisk = os.path.join(xbmc_thumbs, thumbType + '_' + thumbFile)
-    fileOut = thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png'
+    fileOut = os.path.join(xbmc_thumbs, thumbOnDisk + '_' + thumbWidth + '_' + thumbHeight + '.png')
 
     # If there is no local copy
     if not os.path.isfile(thumbOnDisk):
@@ -61,12 +61,12 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
         # Resize windows and linux with freeimage (dunno if it can exist on mac?)
         try:
-            pass
             import FreeImagePy
             image = FreeImagePy.Image()
             image.load(fileName=thumbOnDisk)
             image.resize(size=(widthInt,heightInt), filter=5)
             image.save(fileName=fileOut)
+            image.close()
             imageResized = True
             print 'Used FreeImage'
         except:
