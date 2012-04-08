@@ -11,6 +11,12 @@ import htpc
 import platform
 import subprocess
 
+try:
+    from PIL import Image
+    from PIL import ImageEnhance
+except:
+    pass
+
 def xbmcFetchDataFromUrl(url):
     try:
         data = urllib2.urlopen(url)
@@ -84,8 +90,6 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         # resize PIL (for like openelec etc.)
         if not imageResized:
             try:
-                from PIL import Image
-                from PIL import ImageEnhance
                 image = Image.open(thumbOnDisk)
                 newimage = image.resize((widthInt, heightInt), Image.ANTIALIAS).convert('RGBA')
                 newimage.save(fileOut)
