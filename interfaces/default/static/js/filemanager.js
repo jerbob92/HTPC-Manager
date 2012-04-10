@@ -12,6 +12,9 @@ function loadMounts() {
             $('#filemanager_table_body').html('');
         },
         success: function (data) {
+
+            $('#path-info').html('');
+
             $.each(data, function (path, info) {
 
                 var icon = $('<i>')
@@ -56,11 +59,9 @@ function loadPath(options) {
         type: 'post',
         data: postdata,
         dataType: 'json',
-        beforeSend: function () {
-            $('#filemanager_table_body').html('');
-        },
         success: function (data) {
 
+            $('#filemanager_table_body').html('');
             $('#path-info').html(postdata.path);
 
             var previousAnchor = $('<a>');
