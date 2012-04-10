@@ -175,6 +175,21 @@ class pageHandler:
         return template.respond()
 
     @cherrypy.expose()
+    def filemanager(self, **kwargs):
+
+        # Searchlist voor template ophalen
+        searchList = htpc.settings.readSettings()
+
+        # Template vullen
+        template = Template(file=os.path.join(self.webdir, 'filemanager.tpl'), searchList=[searchList])
+        template.appname = self.appname
+        template.jsfile = 'filemanager.js'
+        template.webdir = self.webdir
+        template.submenu = 'filemanager'
+
+        return template.respond()
+
+    @cherrypy.expose()
     def json(self, **args):
 
         # Kijken welke actie we moeten ondernemen
@@ -294,8 +309,13 @@ class pageHandler:
                 os.chdir(os.getcwd())
                 os.execv(sys.executable, arguments)
             if args.get('action') == 'diskspace':
-                r = reader()
-                return r.getDriveInfo()
+                if args.has_key('path') and args.get('path') != '':
+                    r = reader()
+                    fileList = r.readDir(path=args.get('path'))
+                    return dumps(fileList)
+                else:
+                    r = reader()
+                    return r.getDriveInfo()
 
     @cherrypy.expose()    
     def update(self):

@@ -100,6 +100,15 @@
                             <a href="/nzbsearch">NZB Search</a>
                         </li>
                     #end if
+
+                    #if $submenu == "nzbsearch"
+                    <li class="active">
+                        #else
+                    <li>
+                        #end if
+                        <a href="/filemanager">Filemanager</a>
+                    </li>
+
                 </ul>
 
                 <ul class="nav pull-right">

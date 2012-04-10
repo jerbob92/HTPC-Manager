@@ -1,6 +1,7 @@
 import os
 import string
 import sys
+import platform
 from json import dumps
 
 class spaceType:
@@ -22,14 +23,23 @@ class reader:
         self.data = []
 
     def readDir(self, path):
+        if platform.system() == 'Windows' and len(path) == 1:
+            path = path + ':\\'
         listing = os.listdir(path)
+        toReturn = {}
+        toReturn['dirs'] = {}
+        toReturn['files'] = {}
         for listobj in listing:
             fullpath = os.path.join(path, listobj)
             if(os.path.isdir(fullpath)):
-                print "current dir is: " + listobj
+                if not toReturn.has_key(fullpath):
+                    toReturn['dirs'][fullpath] = {}
+                toReturn['dirs'][fullpath] = listobj
             else:
-                print "current file is: " + listobj
-        return
+                if not toReturn.has_key(fullpath):
+                    toReturn['files'][fullpath] = {}
+                toReturn['files'][fullpath] = listobj
+        return toReturn
 
     def getDriveInfo(self):
         retval = {}
