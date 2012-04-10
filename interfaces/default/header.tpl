@@ -101,7 +101,7 @@
                         </li>
                     #end if
 
-                    #if $submenu == "nzbsearch"
+                    #if $submenu == "filemanager"
                     <li class="active">
                         #else
                     <li>
