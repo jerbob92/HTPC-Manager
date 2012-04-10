@@ -3,13 +3,14 @@ import string
 import sys
 import platform
 from json import dumps
+import ctypes
+import os
 
 class spaceType:
     FREE_FOR_USER = 'FREE_FOR_USER'
     TOTAL_DISK_SPACE = 'TOTAL_DISK_SPACE'
     TOTAL_FREE = 'TOTAL_FREE'
     ERROR = 'ERROR'
-
 
 if sys.platform == "win32":
     from ctypes import WINFUNCTYPE, windll, POINTER, byref, c_ulonglong
@@ -22,6 +23,19 @@ class reader:
     def __init__(self):
         self.data = []
 
+    def is_hidden(self, filepath):
+        name = os.path.basename(os.path.abspath(filepath))
+        return name.startswith('.') or self.has_hidden_attribute(filepath)
+
+    def has_hidden_attribute(self, filepath):
+        try:
+            attrs = ctypes.windll.kernel32.GetFileAttributesW(unicode(filepath))
+            assert attrs != -1
+            result = bool(attrs & 2)
+        except (AttributeError, AssertionError):
+            result = False
+        return result
+
     def readDir(self, path):
         if platform.system() == 'Windows' and len(path) == 1:
             path = path + ':\\'
@@ -31,6 +45,8 @@ class reader:
         toReturn['files'] = {}
         for listobj in listing:
             fullpath = os.path.join(path, listobj)
+            if self.is_hidden(fullpath):
+                continue
             if(os.path.isdir(fullpath)):
                 if not toReturn.has_key(fullpath):
                     toReturn['dirs'][fullpath] = {}
