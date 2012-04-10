@@ -35,5 +35,5 @@ def readSettings(section='htpc'):
 
 def removeThumbs():
     xbmc_thumbs = os.path.join(htpc.userdata, 'xbmc_thumbs/')
-    if os.path.isdir(xbmc_thumbs):
+    if os.path.exists(xbmc_thumbs):
         shutil.rmtree(xbmc_thumbs)

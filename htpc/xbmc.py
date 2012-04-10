@@ -31,7 +31,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
     thumbType = thumbParts.pop()
 
     xbmc_thumbs = os.path.join(htpc.userdata, 'xbmc_thumbs/')
-    if not os.path.isdir(xbmc_thumbs):
+    if not os.path.exists(xbmc_thumbs):
         os.makedirs(xbmc_thumbs)
 
     thumbOnDisk = os.path.join(xbmc_thumbs, thumbType + '_' + thumbFile)
