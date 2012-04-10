@@ -63,7 +63,7 @@ class reader:
             for out in output:
                 parts = out.split()
                 try:
-                    retval[parts[0]] = self.getFreeSpace(parts[0], parts)
+                    retval[parts[5]] = self.getFreeSpace(parts[5], parts)
                 except:
                     pass
 
@@ -108,7 +108,6 @@ class reader:
                 retval[spaceType.TOTAL_FREE] = n_free.value
         else:
             if os.statvfs(path):
-                print data
                 retval[spaceType.FREE_FOR_USER] = (int(data[3]) * 1024)
                 retval[spaceType.TOTAL_DISK_SPACE]  = (int(data[1]) * 1024)
                 retval[spaceType.TOTAL_FREE] = (int(data[3]) * 1024)
