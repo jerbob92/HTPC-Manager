@@ -61,6 +61,8 @@ function loadPath(options) {
         },
         success: function (data) {
 
+            $('#path-info').html(postdata.path);
+
             var previousAnchor = $('<a>');
             previousAnchor.attr('href', 'javascript:;');
             previousAnchor.html('..');
