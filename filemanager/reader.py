@@ -34,11 +34,14 @@ class reader:
             if(os.path.isdir(fullpath)):
                 if not toReturn.has_key(fullpath):
                     toReturn['dirs'][fullpath] = {}
-                toReturn['dirs'][fullpath] = listobj
+                    toReturn['dirs'][fullpath] = listobj
             else:
                 if not toReturn.has_key(fullpath):
                     toReturn['files'][fullpath] = {}
-                toReturn['files'][fullpath] = listobj
+                    toReturn['files'][fullpath] = listobj
+            toReturn['parent'] = os.path.abspath(os.path.join(path, os.path.pardir))
+            if toReturn['parent'] == path:
+                toReturn['parent'] = ''
         return toReturn
 
     def getDriveInfo(self):

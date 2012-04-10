@@ -46,20 +46,40 @@ function loadMounts() {
 
 function loadPath(options) {
 
-    var data = {
-        path: ''
+    var postdata = {
+        path : ''
     };
-    $.extend(data, options)
+    $.extend(postdata, options)
 
     $.ajax({
         url: 'json/?which=system&action=diskspace',
         type: 'post',
-        data: data,
+        data: postdata,
         dataType: 'json',
         beforeSend: function () {
             $('#filemanager_table_body').html('');
         },
         success: function (data) {
+
+            var previousAnchor = $('<a>');
+            previousAnchor.attr('href', 'javascript:;');
+            previousAnchor.html('..');
+            if (data.parent != '') {
+                previousAnchor.click(function () {
+                    loadPath({
+                        path : data.parent
+                    });
+                });
+            } else {
+                previousAnchor.click(function () {
+                    loadMounts();
+                });
+            }
+            var row = $('<tr>');
+            row.append($('<td>').html('&nbsp;'));
+            row.append($('<td>').html(previousAnchor));
+            row.append($('<td>').html('&nbsp;'));
+            $('#filemanager_table_body').append(row);
 
             $.each(data.dirs, function (path, name) {
 
@@ -72,7 +92,9 @@ function loadPath(options) {
                 pathAnchor.attr('href', 'javascript:;');
                 pathAnchor.html(name);
                 pathAnchor.click(function () {
-                    loadPath({path : path})
+                    loadPath({
+                        path : path
+                    })
                 });
 
                 var pathCell = $('<td>');
