@@ -61,6 +61,12 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="nzb_name">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="nzb_name" name="nzb_name" type="text" value="$getVar('nzb_name', 'SABnzbd')" />
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="nzb_ip">IP / Host</label>
                                 <div class="controls">
                                     <input class="span3" id="nzb_ip" name="nzb_ip" type="text" value="$getVar('nzb_ip', '')" />
@@ -126,6 +132,12 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="sb_name">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="sb_name" name="sb_name" type="text" value="$getVar('sb_name', 'SickBeard')" />
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="sb_ip">IP / Host</label>
                                 <div class="controls">
                                     <input class="span3" id="sb_ip" name="sb_ip" type="text" value="$getVar('sb_ip', '')" />
@@ -172,6 +184,12 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="cp_name">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="cp_name" name="cp_name" type="text" value="$getVar('cp_name', 'CouchPotato')" />
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="cp_ip">IP / Host</label>
                                 <div class="controls">
                                     <input class="span3" id="cp_ip" name="cp_ip" type="text" value="$getVar('cp_ip', '')" />
@@ -215,6 +233,12 @@
                                         <input type="checkbox" value="yes" name="use_xbmc" />
                                         #end if
                                     </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="xbmc_name">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="xbmc_name" name="xbmc_name" type="text" value="$getVar('xbmc_name', 'XBMC')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -318,6 +342,12 @@
                             </div>
                         </div>
                         <div class="control-group">
+                                <label class="control-label" for="nzbmatrix_name">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="nzbmatrix_name" name="nzbmatrix_name" type="text" value="$getVar('nzbmatrix_name', 'NZB Search')" />
+                                </div>
+                            </div>
+                        <div class="control-group">
                             <label class="control-label" for="nzbmatrix_apikey">API Key</label>
                             <div class="controls">
                                 <input class="span6" id="nzbmatrix_apikey" name="nzbmatrix_apikey" type="text" value="$getVar('nzbmatrix_apikey', '')" />
@@ -334,6 +364,12 @@
                 <div id="filemanager" class="tab-pane" >
                     <fieldset>
                         <legend>Enabled paths</legend>
+                                                <div class="control-group">
+                                <label class="control-label" for="filemanager">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="filemanager" name="filemanager" type="text" value="$getVar('filemanager', 'File Manager')" />
+                                </div>
+                            </div>
                         #for $path in $availpaths
                         <div class="control-group">
                             <label class="control-label">$path</label>
