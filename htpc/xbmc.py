@@ -10,6 +10,7 @@ import os
 import htpc
 import platform
 import subprocess
+import sys
 
 try:
     from PIL import Image
@@ -58,11 +59,17 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         widthInt = int(thumbWidth)
         heightInt = int(thumbHeight)
         imageResized = False
+        is_64bits = sys.maxsize > 2**32
 
         # Resize windows and linux with freeimage (dunno if it can exist on mac?)
         try:
             import FreeImagePy
-            image = FreeImagePy.Image()
+            if is_64bits and platform.system() == 'Windows':
+                freeImagePyFolder = os.path.join(htpc.root, 'FreeImagePy')
+                freeImagePyDLL = os.path.join(freeImagePyFolder, 'FreeImage64.dll')
+                image = FreeImagePy.Image(libraryName=freeImagePyDLL)
+            else:
+                image = FreeImagePy.Image()
             image.load(fileName=thumbOnDisk)
             image.resize(size=(widthInt,heightInt), filter=5)
             image.save(fileName=fileOut)
