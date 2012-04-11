@@ -16,24 +16,15 @@ GitHubURL = "https://github.com/%s/%s/tarball/%s" % (Owner, Repo, Branch)
 
 def GetHashFromFile():
     
-    if os.path.exists(os.path.join(htpc.root, 'Version.txt')):
-        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'r')
-        LocalHash = VersionFile.read()
-        VersionFile.close()
-        return LocalHash
-    else:  
-        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'w')
-        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'r')
-        LocalHash = VersionFile.read()
-        VersionFile.close()
-        return LocalHash
+    config = readSettings();
+    LocalHash = config.get('version')
+    return LocalHash
 
 def WriteHashToFile(RemoteHash):
 	
-    VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'w')
-    VersionFile.write(RemoteHash)
-    VersionFile.close()
-
+    LocalHash = { 'version': RemoteHash };
+    saveSettings(LocalHash)
+        
 def GetHashFromGitHub():
     
     gh = github.GitHub()
@@ -51,7 +42,7 @@ def DownloadNewVersion():
   
     # Download repo
     url = urllib2.urlopen(GitHubURL)
-    f = open('%s.tar.gz' % Repo,'wb')
+    f = open(os.path.join(htpc.root,'%s.tar.gz' % Repo), 'wb')
     f.write(url.read())
     f.close()
     
@@ -59,15 +50,15 @@ def DownloadNewVersion():
     WriteHashToFile(GetHashFromGitHub()[1])
     
     # Extract to temp folder
-    tar = tarfile.open('%s.tar.gz' % Repo)
-    tar.extractall(os.path.join(htpc.root, '/%s-update' % Repo))
+    tar = tarfile.open(os.path.join(htpc.root, '%s.tar.gz' % Repo))
+    tar.extractall(os.path.join(htpc.root, '%s-update' % Repo))
     tar.close()
 
     # Delete .tar.gz
-    os.remove("%s.tar.gz" % Repo)
+    os.remove(os.path.join(htpc.root, '%s.tar.gz' % Repo))
 
     # Overwrite old files with new ones
-    root_src_dir = os.path.join(htpc.root, "/%s-update/%s-%s-%s" % (Repo, Owner, Repo, GetHashFromGitHub()[0]))
+    root_src_dir = os.path.join(htpc.root, "%s-update/%s-%s-%s" % (Repo, Owner, Repo, GetHashFromGitHub()[0]))
     root_dst_dir = htpc.root
     
     for src_dir, dirs, files in os.walk(root_src_dir):
@@ -82,7 +73,7 @@ def DownloadNewVersion():
             shutil.move(src_file, dst_dir)
     
     try:
-        os.remove(os.path.join(htpc.root,"/%s-update" % Repo))
+        os.remove(os.path.join(htpc.root, "%s-update" % Repo))
     except Exception:
         pass
             
