@@ -61,22 +61,17 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
         imageResized = False
         is_64bits = sys.maxsize > 2**32
 
-        # Resize windows and linux with freeimage (dunno if it can exist on mac?)
-        try:
-            if is_64bits and platform.system() == 'Windows':
-                import freeimage64
-                img = freeimage64.Image(thumbOnDisk)
-                cpy = img.resize(widthInt, heightInt, 5)
-                cpy.save(fileOut)
-            else:
+        # Resize windows and linux with freeimage (dunno if it can exist on mac?) 32bit only
+        if not is_64bits:
+            try:
                 import freeimage
                 img = freeimage.Image(thumbOnDisk)
                 cpy = img.resize(widthInt, heightInt, 5)
                 cpy.save(fileOut)
-            imageResized = True
-            print 'Used FreeImage'
-        except:
-            pass
+                imageResized = True
+                print 'Used FreeImage'
+            except:
+                pass
 
         # resize osx
         if platform.system() == 'Darwin' and not imageResized:
@@ -87,7 +82,7 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
             except:
                 pass
 
-        if platform.system() != 'Windows' and not imageResized:
+        if platform.system() == 'Linux' and not imageResized:
             # resize with imagemagick
             try:
                 subprocess.call(['convert', thumbOnDisk, '-resize', thumbWidth + 'x' + thumbHeight, fileOut])
