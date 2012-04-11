@@ -11,7 +11,7 @@ from htpc.settings import *
 
 Owner = "mhendrikx"
 Repo = "HTPC-Manager"
-Branch = "master"
+Branch = "development"
 GitHubURL = "https://github.com/%s/%s/tarball/%s" % (Owner, Repo, Branch)
 
 def GetHashFromFile():
