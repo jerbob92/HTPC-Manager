@@ -57,7 +57,7 @@
                         #else
                         <li>
                         #end if
-                        <a href="/sabnzbd">SABnzbd</a>
+                        <a href="/sabnzbd">$getVar('nzb_name', 'SABnzbd')</a>
                         </li>
                     #end if
 
@@ -67,7 +67,7 @@
                         #else
                         <li>
                         #end if
-                        <a href="/sickbeard">SickBeard</a>
+                        <a href="/sickbeard">$getVar('sb_name', 'SickBeard')</a>
                         </li>
                     #end if
 
@@ -77,7 +77,7 @@
                         #else
                         <li>
                             #end if
-                            <a href="/couchpotato">CouchPotato</a>
+                            <a href="/couchpotato">$getVar('cp_name', 'CouchPotato')</a>
                         </li>
                     #end if
 
@@ -87,7 +87,7 @@
                         #else
                         <li>
                         #end if
-                        <a href="/xbmc">XBMC</a>
+                        <a href="/xbmc">$getVar('xbmc_name', 'XBMC')</a>
                         </li>
                     #end if
 
@@ -97,7 +97,7 @@
                         #else
                         <li>
                             #end if
-                            <a href="/nzbsearch">NZB Search</a>
+                            <a href="/nzbsearch">$getVar('nzbmatrix_name', 'NZB Search')</a>
                         </li>
                     #end if
 
@@ -106,7 +106,7 @@
                         #else
                     <li>
                         #end if
-                        <a href="/filemanager">Filemanager</a>
+                        <a href="/filemanager">$getVar('filemanager', 'Filemanager')</a>
                     </li>
 
                 </ul>
