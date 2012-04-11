@@ -364,6 +364,12 @@
                 <div id="filemanager" class="tab-pane" >
                     <fieldset>
                         <legend>Enabled paths</legend>
+                                                <div class="control-group">
+                                <label class="control-label" for="filemanager">Menu Name</label>
+                                <div class="controls">
+                                    <input class="span3" id="filemanager" name="filemanager" type="text" value="$getVar('filemanager', 'File Manager')" />
+                                </div>
+                            </div>
                         #for $path in $availpaths
                         <div class="control-group">
                             <label class="control-label">$path</label>
