@@ -343,5 +343,6 @@ class pageHandler:
             if args.get('action') == 'update':
                 cherrypy.engine.exit()
                 DownloadNewVersion()
+                CheckForUpdates()
                 cherrypy.server.start()
                 return dumps({'update' : 'success'})
