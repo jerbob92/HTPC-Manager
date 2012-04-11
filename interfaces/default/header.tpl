@@ -129,7 +129,12 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav pull-right">
+               <ul class="nav pull-right">
+                    #if $getVar('updateavailable', 'no') == "yes"
+                    <li>
+                        <a href="" id="update_button" >Update Avaliable</a>
+                    </li>
+                    #end if
                     #if $submenu == "settings"
                     <li class="active">
                     #else

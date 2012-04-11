@@ -1,16 +1,13 @@
-# Workflow
-#
-# Every 24 hours call CheckForUpdates()
-# 
-#
 import htpc
 from github import github
 import urllib2
 import zipfile, tarfile
-import os
 import shutil
 from glob import glob
 import cherrypy
+import os
+
+from htpc.settings import *
 
 Owner = "mhendrikx"
 Repo = "HTPC-Manager"
@@ -19,12 +16,17 @@ GitHubURL = "https://github.com/%s/%s/tarball/%s" % (Owner, Repo, Branch)
 
 def GetHashFromFile():
     
-    File = open(os.path.join(htpc.root, 'Version.txt'), 'w')
-    File.close()
-    VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'r')
-    LocalHash = VersionFile.read()
-    VersionFile.close()
-    return LocalHash
+    if os.path.exists(os.path.join(htpc.root, 'Version.txt')):
+        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'r')
+        LocalHash = VersionFile.read()
+        VersionFile.close()
+        return LocalHash
+    else:  
+        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'w')
+        VersionFile = open(os.path.join(htpc.root, 'Version.txt'), 'r')
+        LocalHash = VersionFile.read()
+        VersionFile.close()
+        return LocalHash
 
 def WriteHashToFile(RemoteHash):
 	
@@ -46,9 +48,7 @@ def GetHashFromGitHub():
     return (shorthash, longhash)
     		
 def DownloadNewVersion():
-
-    cherrypy.engine.exit()
-    
+  
     # Download repo
     url = urllib2.urlopen(GitHubURL)
     f = open('%s.tar.gz' % Repo,'wb')
@@ -60,14 +60,14 @@ def DownloadNewVersion():
     
     # Extract to temp folder
     tar = tarfile.open('%s.tar.gz' % Repo)
-    tar.extractall(os.path.join(htpc.root, '%s-update' % Repo))
+    tar.extractall(os.path.join(htpc.root, '/%s-update' % Repo))
     tar.close()
 
     # Delete .tar.gz
     os.remove("%s.tar.gz" % Repo)
 
     # Overwrite old files with new ones
-    root_src_dir = os.path.join(htpc.root, "%s-update/%s-%s-%s") % (Repo, Owner, Repo, GetHashFromGitHub()[0])
+    root_src_dir = os.path.join(htpc.root, "/%s-update/%s-%s-%s" % (Repo, Owner, Repo, GetHashFromGitHub()[0]))
     root_dst_dir = htpc.root
     
     for src_dir, dirs, files in os.walk(root_src_dir):
@@ -82,12 +82,12 @@ def DownloadNewVersion():
             shutil.move(src_file, dst_dir)
     
     try:
-        os.remove(os.path.join(htpc.root, "%s-update" % Repo))
+        os.remove(os.path.join(htpc.root,"/%s-update" % Repo))
     except Exception:
         pass
             
 def CheckForUpdates():
-    
+
     gh = github.GitHub()
     
     L = list((c.id) for c in gh.commits.forBranch(Owner, Repo, Branch))
@@ -98,10 +98,17 @@ def CheckForUpdates():
 		i = -1 # no match, file empty
 
     if i == -1:
-        DownloadNewVersion() # First time use tell them to update and if they agree call DownloadNewVersion()
-        
+        #DownloadNewVersion() # First time use tell them to update and if they agree call DownloadNewVersion()
+        data = { 'updateavailable': 'yes' };
+        saveSettings(data)
+        return True
     elif i == 0:
-        raise cherrypy.HTTPRedirect("/") # no update available dont show anything
-        
+        #raise cherrypy.HTTPRedirect("/") # no update available dont show anything
+        data = { 'updateavailable': 'no' };
+        saveSettings(data)
+        return True
     else:
-        DownloadNewVersion() # Update Available and if they agree call DownloadNewVersion()
+        #DownloadNewVersion() # Update Available and if they agree call DownloadNewVersion()
+        data = { 'updateavailable': 'yes' };
+        saveSettings(data)
+        return True
