@@ -63,12 +63,11 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
 
         # Resize windows and linux with freeimage (dunno if it can exist on mac?)
         try:
-            import FreeImagePy
             if is_64bits and platform.system() == 'Windows':
-                freeImagePyFolder = os.path.join(htpc.root, 'FreeImagePy')
-                freeImagePyDLL = os.path.join(freeImagePyFolder, 'FreeImage64.dll')
-                image = FreeImagePy.Image(libraryName=freeImagePyDLL)
+                import FreeImagePy64
+                image = FreeImagePy64.Image()
             else:
+                import FreeImagePy
                 image = FreeImagePy.Image()
             image.load(fileName=thumbOnDisk)
             image.resize(size=(widthInt,heightInt), filter=5)
