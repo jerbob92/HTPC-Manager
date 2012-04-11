@@ -364,12 +364,24 @@
                 <div id="filemanager" class="tab-pane" >
                     <fieldset>
                         <legend>Enabled paths</legend>
-                                                <div class="control-group">
-                                <label class="control-label" for="filemanager">Menu Name</label>
+                        <div class="control-group">
+                            <label class="control-label">Enable</label>
                                 <div class="controls">
-                                    <input class="span3" id="filemanager" name="filemanager" type="text" value="$getVar('filemanager', 'File Manager')" />
+                                    <label class="checkbox enable-module">
+                                        #if $getVar('use_filemanger', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_filemanger" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_filemanger" />
+                                        #end if
+                                    </label>
                                 </div>
                             </div>
+                        <div class="control-group">
+                            <label class="control-label" for="filemanager">Menu Name</label>
+                            <div class="controls">
+                                <input class="span3" id="filemanager" name="filemanager" type="text" value="$getVar('filemanager', 'File Manager')" />
+                            </div>
+                        </div>
                         #for $path in $availpaths
                         <div class="control-group">
                             <label class="control-label">$path</label>
