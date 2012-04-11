@@ -6,6 +6,7 @@ import htpc.settings
 from Cheetah.Template import Template
 
 from htpc.updater import *
+from htpc.tasks import *
 from htpc.sabnzbd import *
 from htpc.sickbeard import *
 from htpc.couchpotato import *
@@ -32,12 +33,18 @@ if config.has_key('my_port') and config.get('my_port') != '':
     configPort = config.get('my_port')
     port = int(configPort)
 
+def CheckUpdateSchedule():
+    config = readSettings();
+    data = config.get('updateavailable')
+    return data  
+    
 class pageHandler:
     def __init__(self, root):
 
         self.root = root
         self.webdir = os.path.join(self.root, 'interfaces/default/')
         self.appname = 'HTPC Manager'
+        my_scheduler.start()
 
     @cherrypy.expose()
     def index(self):
@@ -48,6 +55,8 @@ class pageHandler:
         template.webdir = self.webdir
         template.submenu = ''
         template.jsfile = 'main.js'
+        template.updateavailable = CheckUpdateSchedule()
+        
         return template.respond()
 
     @cherrypy.expose()
@@ -335,6 +344,6 @@ class pageHandler:
     @cherrypy.expose()    
     def update(self):
         cherrypy.engine.exit()
-        CheckForUpdates()
+        DownloadNewVersion()
         cherrypy.server.start()
         raise cherrypy.HTTPRedirect("/")
