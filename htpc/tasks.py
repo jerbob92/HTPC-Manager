@@ -6,7 +6,7 @@ from updater import *
 # Create a task called "foo", that runs a function named "might_fail" for up to five tries.
 foo_task = scheduler.Task("Update",
                           datetime.datetime.now(),
-                          scheduler.every_x_mins(1),
+                          scheduler.every_x_mins(1440),
                           scheduler.RunOnce(CheckForUpdates))
 
 # Create a scheduler
