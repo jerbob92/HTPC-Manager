@@ -53,9 +53,19 @@ class pageHandler:
     @cherrypy.expose()
     def settings(self, **kwargs):
 
+        # Searchlist voor template ophalen
+        searchList = htpc.settings.readSettings()
+
+        # get available paths
+        r = reader()
+        availpaths = r.getDriveInfo()
+
         # Als er een POST is
         if kwargs:
             if kwargs.has_key('save_settings'):
+                for path in availpaths:
+                    if not kwargs.has_key('paths__' + path):
+                        kwargs['paths__' + path] = 'no'
                 if not kwargs.has_key('use_nzb'):
                     kwargs['use_nzb'] = 'no'
                 if not kwargs.has_key('use_sb'):
@@ -77,11 +87,10 @@ class pageHandler:
 
             raise cherrypy.HTTPRedirect('')
 
+        # Paths for filemanager
+        searchList['availpaths'] = availpaths
 
-        # Searchlist voor template ophalen
-        searchList = htpc.settings.readSettings()
-
-        # Template vullen
+        # Fill template
         template = Template(file=os.path.join(self.webdir, 'settings.tpl'), searchList=[searchList])
         template.appname = self.appname
         template.webdir = self.webdir
@@ -314,8 +323,14 @@ class pageHandler:
                     fileList = r.readDir(path=args.get('path'))
                     return dumps(fileList)
                 else:
+                    settings = htpc.settings.readSettings()
                     r = reader()
-                    return r.getDriveInfo()
+                    availpaths = r.getDriveInfo()
+                    toReturn = {}
+                    for path in availpaths:
+                        if settings.has_key('paths__' + path.lower()) and settings.get('paths__' + path.lower()) == 'yes':
+                            toReturn[path] = availpaths[path]
+                    return dumps(toReturn)
 
     @cherrypy.expose()    
     def update(self):

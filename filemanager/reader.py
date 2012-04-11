@@ -98,7 +98,7 @@ class reader:
                 except:
                     pass
 
-        return dumps(retval)
+        return retval
 
     def getFreeSpace(self, path = '/', data = {}):
         retval = {}

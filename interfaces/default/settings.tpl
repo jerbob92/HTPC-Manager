@@ -16,6 +16,7 @@
             <li class="active"><a href="#data" data-toggle="tab">General setting</a></li>
             <li><a href="#miscellaneous" data-toggle="tab">Miscellaneous</a></li>
             <li><a href="#search" data-toggle="tab">NZB Search</a></li>
+            <li><a href="#filemanager" data-toggle="tab">Filemanager</a></li>
         </ul>
 
         <form action="" id="base-settings-form" name="base-settings-form" method="post" class="form-horizontal">
@@ -302,32 +303,57 @@
                 </div>
 
                 <div id="search" class="tab-pane" >
-                        <fieldset>
-                            <legend>NZB Matrix</legend>
-                            <div class="control-group">
-                                <label class="control-label">Enable</label>
-                                <div class="controls">
-                                    <label class="checkbox enable-module">
-                                        #if $getVar('use_nzbmatrix', 'no') == "yes"
-                                        <input type="checkbox" checked="checked" value="yes" name="use_nzbmatrix" />
-                                        #else
-                                        <input type="checkbox" value="yes" name="use_nzbmatrix" />
-                                        #end if
-                                    </label>
-                                </div>
+                    <fieldset>
+                        <legend>NZB Matrix</legend>
+                        <div class="control-group">
+                            <label class="control-label">Enable</label>
+                            <div class="controls">
+                                <label class="checkbox enable-module">
+                                    #if $getVar('use_nzbmatrix', 'no') == "yes"
+                                    <input type="checkbox" checked="checked" value="yes" name="use_nzbmatrix" />
+                                    #else
+                                    <input type="checkbox" value="yes" name="use_nzbmatrix" />
+                                    #end if
+                                </label>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="nzbmatrix_apikey">API Key</label>
-                                <div class="controls">
-                                    <input class="span6" id="nzbmatrix_apikey" name="nzbmatrix_apikey" type="text" value="$getVar('nzbmatrix_apikey', '')" />
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <div class="form-actions">
-                            <input class="btn btn-primary" type="submit" value="Save changes" />
-                            <input class="btn" type="reset" value="Clear" />
                         </div>
+                        <div class="control-group">
+                            <label class="control-label" for="nzbmatrix_apikey">API Key</label>
+                            <div class="controls">
+                                <input class="span6" id="nzbmatrix_apikey" name="nzbmatrix_apikey" type="text" value="$getVar('nzbmatrix_apikey', '')" />
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <input class="btn btn-primary" type="submit" value="Save changes" />
+                        <input class="btn" type="reset" value="Clear" />
+                    </div>
+
+                </div>
+                <div id="filemanager" class="tab-pane" >
+                    <fieldset>
+                        <legend>Enabled paths</legend>
+                        #for $path in $availpaths
+                        <div class="control-group">
+                            <label class="control-label">$path</label>
+                            <div class="controls">
+                                <label class="checkbox">
+                                    #if $getVar('paths__' + $path.lower(), 'no') == "yes"
+                                    <input type="checkbox" checked="checked" value="yes" name="paths__$path" />
+                                    #else
+                                    <input type="checkbox" value="yes" name="paths__$path" />
+                                    #end if
+                                </label>
+                            </div>
+                        </div>
+                        #end for
+                    </fieldset>
+
+                    <div class="form-actions">
+                        <input class="btn btn-primary" type="submit" value="Save changes" />
+                        <input class="btn" type="reset" value="Clear" />
+                    </div>
 
                 </div>
 
