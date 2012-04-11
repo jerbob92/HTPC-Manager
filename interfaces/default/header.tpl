@@ -22,8 +22,8 @@
 
 <div id="notify-user" class="alert alert-block">
     <a class="close">&times;</a>
-    <h4 class="alert-heading">Warning!</h4>
-    <span>weee</span>
+    <h4 class="alert-heading"></h4>
+    <span></span>
 </div>
 
 <div id="modal_dialog" class="modal hide">
@@ -132,7 +132,7 @@
                <ul class="nav pull-right">
                     #if $getVar('updateavailable', 'no') == "yes"
                     <li>
-                        <a href="" id="update_button" >Update Avaliable</a>
+                        <a href="javascript:;" id="update_button" >Update Avaliable</a>
                     </li>
                     #end if
                     #if $submenu == "settings"

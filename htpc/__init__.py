@@ -340,10 +340,8 @@ class pageHandler:
                         if settings.has_key('paths__' + path.lower()) and settings.get('paths__' + path.lower()) == 'yes':
                             toReturn[path] = availpaths[path]
                     return dumps(toReturn)
-
-    @cherrypy.expose()    
-    def update(self):
-        cherrypy.engine.exit()
-        DownloadNewVersion()
-        cherrypy.server.start()
-        raise cherrypy.HTTPRedirect("/")
+            if args.get('action') == 'update':
+                cherrypy.engine.exit()
+                DownloadNewVersion()
+                cherrypy.server.start()
+                return dumps({'update' : 'success'})

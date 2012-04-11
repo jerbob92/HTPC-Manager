@@ -69,6 +69,24 @@ $(document).ready(function () {
         $('#modal_dialog .modal-fanart').css('background', '#ffffff');
     })
 
+    $('#update_button').click(function () {
+        if (confirm('Install new version of HTPC-Manager?')) {
+            $.ajax({
+                url: 'json/?which=system&action=update',
+                type: 'get',
+                dataType: 'json',
+                beforeSend: function() {
+                    notifySuccess('Starting update...')
+                },
+                success: function (data) {
+                    if (data.update == 'success') {
+                        notifySuccess('New version installed!');
+                    }
+                }
+            });
+        }
+    });
+
 });
 
 // Text inkorten
