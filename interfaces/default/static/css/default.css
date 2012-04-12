@@ -113,35 +113,6 @@ h6.movie-title, h6.show-title {
     margin-left: -350px;
 }
 
-table .header {
-    cursor: pointer;
-}
-table .header:after {
-    content: "";
-    float: right;
-    margin-top: 7px;
-    border-width: 0 4px 4px;
-    border-style: solid;
-    border-color: #000000 transparent;
-    visibility: hidden;
-}
-table .headerSortUp, table .headerSortDown {
-    color: #FAA732;
-}
-table .header:hover:after {
-    visibility: visible;
-}
-table .headerSortDown:after, table .headerSortDown:hover:after {
-    visibility: visible;
-}
-table .headerSortUp:after {
-    border-bottom: none;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #000000;
-    visibility: visible;
-}
-
 .popover-inner {
     width: 550px;
 }
@@ -157,3 +128,4 @@ table .headerSortUp:after {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCFFFFFF,endColorstr=#CCFFFFFF);   /* IE6 & 7 */
     zoom: 1;
 }
+

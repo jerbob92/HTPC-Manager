@@ -8,11 +8,9 @@
     <link href="/css/default.css" rel="stylesheet">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="/css/responsive.css" rel="stylesheet">
-
-    <script src="js/jquery-1.7.1.min.js"></script>
-    <script src="js/jquery-ui-1.8.17.custom.min.js"></script>
-    <script src="js/jquery.tablesorter.min.js"></script>
-    <script src="js/jquery.metadata.js"></script>
+    <link href="/css/tablesorter.css" rel="stylesheet">
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/jquery-ui-1.8.18.custom.min.js"></script>
     <script src="/js/default.js"></script>
     #if $varExists('jsfile')
     <script src="/js/$getVar('jsfile')"></script>
