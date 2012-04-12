@@ -90,7 +90,24 @@ $(document).ready(function () {
         }
     });
 
+    blink(900000, 1000);
+
 });
+
+// Blink update icon
+function blink(time, interval){
+    var timer = window.setInterval(function(){
+        $("#update-icon").animate({
+            opacity :  "0.1"
+        }, 250);
+        window.setTimeout(function(){
+            $("#update-icon").animate({
+                opacity :  "1"
+            }, 250);
+        }, 100);
+    }, interval);
+    window.setTimeout(function(){clearInterval(timer);}, time);
+}
 
 // Text inkorten
 function shortenText(text, length) {

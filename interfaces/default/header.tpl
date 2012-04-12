@@ -124,7 +124,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             #if $getVar('updateavailable', 'no') == "yes"
-                            <i class="icon-exclamation-sign icon-white"></i>
+                            <i id="update-icon" class="icon-exclamation-sign icon-white"></i>
                             #else
                             <i class="icon-list icon-white"></i>
                             #end if
