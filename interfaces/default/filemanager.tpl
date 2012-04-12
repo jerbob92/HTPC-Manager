@@ -6,7 +6,7 @@
 
         <div class="page-header page-title">
             <h1>
-                Filemanager <small id="path-info"></small>
+                $getVar('filemanager', 'Filemanager') <small id="path-info"></small>
             </h1>
         </div>
 

@@ -6,7 +6,7 @@
 
         <div class="page-header page-title">
             <h1>
-                NZB Search
+                $getVar('nzbmatrix_name', 'NZB Search')
             </h1>
         </div>
 

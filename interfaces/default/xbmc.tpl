@@ -7,7 +7,7 @@
 
             <div class="page-header page-title">
                 <h1>
-                    XBMC
+                    $getVar('xbmc_name', 'XBMC')
                 </h1>
             </div>
 

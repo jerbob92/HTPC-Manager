@@ -6,7 +6,7 @@
 
         <div class="page-header page-title">
             <h1>
-                SickBeard
+                $getVar('sb_name', 'SickBeard')
             </h1>
         </div>
 
