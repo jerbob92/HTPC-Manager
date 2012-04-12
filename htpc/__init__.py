@@ -89,6 +89,18 @@ class pageHandler:
                     kwargs['xbmc_show_banners'] = 'no'
                 if not kwargs.has_key('sort_ignore_articles'):
                     kwargs['sort_ignore_articles'] = 'no'
+                if not kwargs.has_key('use_dash_nzb'):
+                    kwargs['use_dash_nzb'] = 'no'
+                if not kwargs.has_key('use_dash_cp'):
+                    kwargs['use_dash_cp'] = 'no'
+                if not kwargs.has_key('use_dash_sb'):
+                    kwargs['use_dash_sb'] = 'no'
+                if not kwargs.has_key('use_dash_rec_music'):
+                    kwargs['use_dash_rec_music'] = 'no'                    
+                if not kwargs.has_key('use_dash_rec_tv'):
+                    kwargs['use_dash_rec_tv'] = 'no'                      
+                if not kwargs.has_key('use_dash_rec_movies'):
+                    kwargs['use_dash_rec_movies'] = 'no'                      
                 htpc.settings.saveSettings(kwargs)
 
             if kwargs.has_key('regenerate_thumbs'):
