@@ -99,13 +99,15 @@
                         </li>
                     #end if
 
-                    #if $submenu == "filemanager"
-                    <li class="active">
-                        #else
-                    <li>
-                        #end if
-                        <a href="/filemanager">$getVar('filemanager', 'Filemanager')</a>
-                    </li>
+                     #if $getVar('use_filemanger', 'no') == "yes"
+                        #if $submenu == "filemanager"
+                        <li class="active">
+                            #else
+                        <li>
+                            #end if
+                            <a href="/filemanager">$getVar('filemanager', 'Filemanager')</a>
+                        </li>
+                    #end if
 
                 </ul>
 
