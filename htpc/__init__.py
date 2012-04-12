@@ -85,7 +85,7 @@ class pageHandler:
                     kwargs['use_xbmc'] = 'no'
                 if not kwargs.has_key('use_nzbmatrix'):
                     kwargs['use_nzbmatrix'] = 'no'
-                 if not kwargs.has_key('use_filemanger'):
+                if not kwargs.has_key('use_filemanger'):
                     kwargs['use_filemanger'] = 'no'    
                 if not kwargs.has_key('xbmc_show_banners'):
                     kwargs['xbmc_show_banners'] = 'no'
