@@ -6,7 +6,7 @@
 
         <div class="page-header page-title">
             <h1>
-                CouchPotato v2
+                $getVar('cp_name', 'CouchPotato')
             </h1>
         </div>
 

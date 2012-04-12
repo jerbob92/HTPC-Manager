@@ -5,7 +5,7 @@
     <div class="content maincontent">
         
         <div class="page-header page-title">
-            <h1>SABnzbd
+            <h1>$getVar('nzb_name', 'SABnzbd')
                 <small>
                     <strong>Speed:</strong> <span id="queue_speed"></span>
                     <strong>Status:</strong> <span id="queue_state"></span>
