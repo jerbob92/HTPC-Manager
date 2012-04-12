@@ -1,3 +1,4 @@
+top of page
 #if $os.path.isfile($webdir):
 #include $webdir + "./header.tpl"#
 #else
@@ -17,19 +18,30 @@
         #end if
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#data" data-toggle="tab">General setting</a></li>
-            <li><a href="#miscellaneous" data-toggle="tab">Miscellaneous</a></li>
+            <li class="dropdown active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Server 
+					<b class="caret"></b>
+				</a>
+			<ul class="dropdown-menu">
+				<li><a href="#server" data-toggle="tab">HTPC Manager</a></li>
+				<li><a href="#xbmc" data-toggle="tab">XBMC</a></li>
+				<li><a href="#sabnzbd" data-toggle="tab">SABNzbd</a></li>
+				<li><a href="#sickbeard" data-toggle="tab">SickBeard</a></li>
+				<li><a href="#couchpotato" data-toggle="tab">CouchPotato v2</a></li>
+				<li><a href="#headphones" data-toggle="tab">Headphones</a></li>
+				<li><a href="#trakt" data-toggle="tab">Trakt</a></li>
+			</ul>
+			</li>
+            <li><a href="#miscellaneous" data-toggle="tab">Display</a></li>
             <li><a href="#search" data-toggle="tab">NZB Search</a></li>
-            <li><a href="#filemanager" data-toggle="tab">Filemanager</a></li>
+            <li><a href="#filemanager" data-toggle="tab">File Manager</a></li>
         </ul>
-
         <form action="" id="base-settings-form" name="base-settings-form" method="post" class="form-horizontal">
             <input type="hidden" name="save_settings" value="1" />
-
             <div class="tab-content">
-                <div id="data" class="tab-pane active" >
-                        <fieldset>
-                            <legend>HTPC-Manager</legend>
+					<div id="server" class="tab-pane active">
+			            <fieldset>
+                            <legend>HTPC Manager</legend>
                             <div class="control-group">
                                 <label class="control-label" for="my_port">Port</label>
                                 <div class="controls">
@@ -49,8 +61,14 @@
                                 </div>
                             </div>
                         </fieldset>
-
-                        <fieldset>
+						<div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="Save changes" />
+                            <input class="btn" type="reset" value="Clear" />
+                        </div>
+					</div>
+					
+					<div id="sabnzbd" class="tab-pane fade">
+					                        <fieldset>
                             <legend>SABnzbd</legend>
                             <div class="control-group">
                                 <label class="control-label">Enable</label>
@@ -79,13 +97,13 @@
                             <div class="control-group">
                                 <label class="control-label" for="nzb_name">Menu Name</label>
                                 <div class="controls">
-                                    <input class="span3" id="nzb_name" name="nzb_name" type="text" value="$getVar('nzb_name', 'SABnzbd')" />
+                                    <input class="span3" id="nzb_name" name="nzb_name" type="text" placeholder="This field is required" value="$getVar('nzb_name', 'SABnzbd')" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="nzb_ip">IP / Host</label>
                                 <div class="controls">
-                                    <input class="span3" id="nzb_ip" name="nzb_ip" type="text" value="$getVar('nzb_ip', '127.0.0.1')" />
+                                    <input class="span3" id="nzb_ip" name="nzb_ip" type="text" placeholder="ex: localhost" value="$getVar('nzb_ip', '127.0.0.1')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -109,7 +127,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="nzb_apikey">API Key</label>
                                 <div class="controls">
-                                    <input class="span6" id="nzb_apikey" name="nzb_apikey" type="text" value="$getVar('nzb_apikey', '')" />
+                                    <input class="span3" id="nzb_apikey" name="nzb_apikey" type="text" value="$getVar('nzb_apikey', '')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -132,8 +150,14 @@
                                 </div>
                             </div>
                         </fieldset>
-
-                        <fieldset>
+						<div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="Save changes" />
+                            <input class="btn" type="reset" value="Clear" />
+                        </div>
+					</div>
+					
+					<div id="sickbeard" class="tab-pane fade">
+				                        <fieldset>
                             <legend>SickBeard</legend>
                             <div class="control-group">
                                 <label class="control-label">Enable</label>
@@ -192,12 +216,18 @@
                             <div class="control-group">
                                 <label class="control-label" for="sb_apikey">API Key</label>
                                 <div class="controls">
-                                    <input class="span6" id="sb_apikey" name="sb_apikey" type="text" value="$getVar('sb_apikey', '')" />
+                                    <input class="span3" id="sb_apikey" name="sb_apikey" type="text" value="$getVar('sb_apikey', '')" />
                                 </div>
                             </div>
                         </fieldset>
-
-                        <fieldset>
+						<div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="Save changes" />
+                            <input class="btn" type="reset" value="Clear" />
+                        </div>
+					</div>
+					
+					<div id="couchpotato" class="tab-pane fade">
+				                        <fieldset>
                             <legend>CouchPotato V2</legend>
                             <div class="control-group">
                                 <label class="control-label">Enable</label>
@@ -256,11 +286,18 @@
                             <div class="control-group">
                                 <label class="control-label" for="sb_apikey">API Key</label>
                                 <div class="controls">
-                                    <input class="span6" id="cp_apikey" name="cp_apikey" type="text" value="$getVar('cp_apikey', '')" />
+                                    <input class="span3" id="cp_apikey" name="cp_apikey" type="text" value="$getVar('cp_apikey', '')" />
                                 </div>
                             </div>
                         </fieldset>
+						<div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="Save changes" />
+                            <input class="btn" type="reset" value="Clear" />
+                        </div>
 
+					</div>
+					
+					<div id="xbmc" class="tab-pane fade">
                         <fieldset>
                             <legend>XBMC</legend>
                             <div class="control-group">
@@ -342,15 +379,36 @@
                                 </div>
                             </div>
                         </fieldset>
-
-                        <div class="form-actions">
+						<div class="form-actions">
                             <input class="btn btn-primary" type="submit" value="Save changes" />
                             <input class="btn" type="reset" value="Clear" />
                         </div>
+					</div>
+					<div id="headphones" class="tab-pane fade">
+                    <legend>Headphones</legend>
+					Coming Soon!!!
+					</div>
+					<div id="trakt" class="tab-pane fade">
+                    <legend>Trakt</legend>
+					Coming Soon!!!
+					</div>
 
-                </div>
-
-                <div id="miscellaneous" class="tab-pane" >
+					<div class="control-group">
+                        <label class="control-label" for="theme">Theme</label>
+                        <div class="controls">
+                            <select id="theme" name="theme">
+                                #for $interface in $availinterfaces
+                                    #if $getVar('theme', 'default') == $interface
+                                        <option selected="selected" value="$interface">$interface</option>
+                                    #else
+                                        <option value="$interface">$interface</option>
+                                    #end if
+                                #end for
+                            </select>
+                        </div>
+                    </div>
+					
+					<div id="miscellaneous" class="tab-pane" >
                         <fieldset>
                             <legend>Thumbnails</legend>
                             <div class="control-group">
@@ -375,22 +433,6 @@
 
                         <fieldset>
                             <legend>Options</legend>
-
-                            <div class="control-group">
-                                <label class="control-label" for="theme">Theme</label>
-                                <div class="controls">
-                                    <select id="theme" name="theme">
-                                        #for $interface in $availinterfaces
-                                            #if $getVar('theme', 'default') == $interface
-                                                <option selected="selected" value="$interface">$interface</option>
-                                            #else
-                                                <option value="$interface">$interface</option>
-                                            #end if
-                                        #end for
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="control-group">
                                 <label class="control-label">Sorting ignore articles (When possible)</label>
                                 <div class="controls">
@@ -416,15 +458,15 @@
                             <input class="btn btn-primary" type="submit" value="Save changes" />
                             <input class="btn" type="reset" value="Clear" />
                         </div>
-                </div>
+					</div>
 
-                <div id="search" class="tab-pane" >
-                    <fieldset>
-                        <legend>NZB Matrix</legend>
-                        <div class="control-group">
-                            <label class="control-label">Enable</label>
-                            <div class="controls">
-                                <label class="checkbox enable-module">
+					<div id="search" class="tab-pane" >
+						<fieldset>
+							<legend>NZB Matrix</legend>
+							<div class="control-group">
+								<label class="control-label">Enable</label>
+								<div class="controls">
+									<label class="checkbox enable-module">
                                     #if $getVar('use_nzbmatrix', 'no') == "yes"
                                     <input type="checkbox" checked="checked" value="yes" name="use_nzbmatrix" />
                                     #else
@@ -442,7 +484,7 @@
                         <div class="control-group">
                             <label class="control-label" for="nzbmatrix_apikey">API Key</label>
                             <div class="controls">
-                                <input class="span6" id="nzbmatrix_apikey" name="nzbmatrix_apikey" type="text" value="$getVar('nzbmatrix_apikey', '')" />
+                                <input class="span3" id="nzbmatrix_apikey" name="nzbmatrix_apikey" type="text" value="$getVar('nzbmatrix_apikey', '')" />
                             </div>
                         </div>
                     </fieldset>
@@ -451,8 +493,8 @@
                         <input class="btn btn-primary" type="submit" value="Save changes" />
                         <input class="btn" type="reset" value="Clear" />
                     </div>
-
                 </div>
+				
                 <div id="filemanager" class="tab-pane" >
                     <fieldset>
                         <legend>Enabled paths</legend>
