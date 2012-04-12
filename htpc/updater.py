@@ -73,7 +73,7 @@ def DownloadNewVersion():
             shutil.move(src_file, dst_dir)
     
     try:
-        os.remove(os.path.join(htpc.root, "%s-update" % Repo))
+        shutil.rmtree(os.path.join(htpc.root, "%s-update" % Repo))
     except Exception:
         pass
             
