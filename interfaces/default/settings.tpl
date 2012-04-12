@@ -1,4 +1,4 @@
-#include $webdir + "/header.tpl"#
+ #include $webdir + "/header.tpl"#
 
 <div class="container">
 
@@ -60,6 +60,18 @@
                                     </label>
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label">Dashboard: Info</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_nzb', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_nzb" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_nzb" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>                            
                             <div class="control-group">
                                 <label class="control-label" for="nzb_name">Menu Name</label>
                                 <div class="controls">
@@ -132,6 +144,18 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label">Dashboard: Next Aired</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_sb', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_sb" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_sb" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="sb_name">Menu Name</label>
                                 <div class="controls">
                                     <input class="span3" id="sb_name" name="sb_name" type="text" value="$getVar('sb_name', 'SickBeard')" />
@@ -184,6 +208,18 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label">Dashboard: Movies</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_cp', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_cp" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_cp" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>                            
+                            <div class="control-group">
                                 <label class="control-label" for="cp_name">Menu Name</label>
                                 <div class="controls">
                                     <input class="span3" id="cp_name" name="cp_name" type="text" value="$getVar('cp_name', 'CouchPotato')" />
@@ -231,6 +267,42 @@
                                         <input type="checkbox" checked="checked" value="yes" name="use_xbmc" />
                                         #else
                                         <input type="checkbox" value="yes" name="use_xbmc" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Dashboard: Movies</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_rec_movies', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_rec_movies" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_rec_movies" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Dashboard: TV</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_rec_tv', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_rec_tv" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_rec_tv" />
+                                        #end if
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Dashboard: Music</label>
+                                <div class="controls">
+                                    <label class="checkbox">
+                                        #if $getVar('use_dash_rec_music', 'no') == "yes"
+                                        <input type="checkbox" checked="checked" value="yes" name="use_dash_rec_music" />
+                                        #else
+                                        <input type="checkbox" value="yes" name="use_dash_rec_music" />
                                         #end if
                                     </label>
                                 </div>
