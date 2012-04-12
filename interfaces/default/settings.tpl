@@ -59,25 +59,26 @@
                                     <input class="span3" autocomplete="off" id="my_password" name="my_password" type="password" value="$getVar('my_password', '')" />
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label" for="theme">Theme</label>
+                                <div class="controls">
+                                    <select id="theme" name="theme">
+                                        #for $interface in $availinterfaces
+                                            #if $getVar('theme', 'default') == $interface
+                                            <option selected="selected" value="$interface">$interface</option>
+                                            #else
+                                            <option value="$interface">$interface</option>
+                                            #end if
+                                        #end for
+                                    </select>
+                                </div>
+                            </div>
                         </fieldset>
 						<div class="form-actions">
                             <input class="btn btn-primary" type="submit" value="Save changes" />
                             <input class="btn" type="reset" value="Clear" />
                         </div>
-                        <div class="control-group">
-                            <label class="control-label" for="theme">Theme</label>
-                            <div class="controls">
-                                <select id="theme" name="theme">
-                                    #for $interface in $availinterfaces
-                                        #if $getVar('theme', 'default') == $interface
-                                            <option selected="selected" value="$interface">$interface</option>
-                                        #else
-                                            <option value="$interface">$interface</option>
-                                        #end if
-                                    #end for
-                                </select>
-                            </div>
-                        </div>
+
 					</div>
 					
 					<div id="sabnzbd" class="tab-pane fade">
