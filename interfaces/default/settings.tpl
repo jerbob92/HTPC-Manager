@@ -1,4 +1,8 @@
- #include $webdir + "/header.tpl"#
+#if $os.path.isfile($webdir):
+#include $webdir + "./header.tpl"#
+#else
+#include $defaultwebdir + "./header.tpl"#
+#end if
 
 <div class="container">
 
@@ -371,6 +375,22 @@
 
                         <fieldset>
                             <legend>Options</legend>
+
+                            <div class="control-group">
+                                <label class="control-label" for="theme">Theme</label>
+                                <div class="controls">
+                                    <select id="theme" name="theme">
+                                        #for $interface in $availinterfaces
+                                            #if $getVar('theme', 'default') == $interface
+                                                <option selected="selected" value="$interface">$interface</option>
+                                            #else
+                                                <option value="$interface">$interface</option>
+                                            #end if
+                                        #end for
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="control-group">
                                 <label class="control-label">Sorting ignore articles (When possible)</label>
                                 <div class="controls">
@@ -484,5 +504,8 @@
 
 </div>
 
-
-#include $webdir + "/footer.tpl"#
+#if $os.path.isfile($webdir):
+#include $webdir + "./footer.tpl"#
+#else
+#include $defaultwebdir + "./footer.tpl"#
+#end if

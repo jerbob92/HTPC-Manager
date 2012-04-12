@@ -25,9 +25,17 @@ userdata = os.path.join(root, 'userdata/')
 if not os.path.isdir(userdata):
     os.makedirs(userdata)
 
+# Interfaces folder
+defaultinterface = 'default'
+interfaces = os.path.join(root, 'interfaces/')
+
 # Settings file
 settingsfile = os.path.join(userdata, 'config.cfg')
 config = htpc.settings.readSettings()
+
+interfacefolder = 'default'
+if config.has_key('theme') and config.get('theme') != '':
+    interfacefolder = config.get('theme')
 
 if config.has_key('my_port') and config.get('my_port') != '':
     configPort = config.get('my_port')
@@ -42,16 +50,25 @@ class pageHandler:
     def __init__(self, root):
 
         self.root = root
-        self.webdir = os.path.join(self.root, 'interfaces/default/')
+        self.webdir = os.path.join(self.root, 'interfaces/' + interfacefolder + '/')
+        self.defaultwebdir = os.path.join(self.root, 'interfaces/' + defaultinterface + '/')
         self.appname = 'HTPC Manager'
         my_scheduler.start()
+
+    def loadTemplateFile(self, template):
+        if os.path.isfile(os.path.join(self.webdir, template)):
+            tpl = os.path.join(self.webdir, template)
+        else:
+            tpl = os.path.join(self.defaultwebdir, template)
+        return tpl
 
     @cherrypy.expose()
     def index(self):
         # Searchlist voor template ophalen
         searchList = htpc.settings.readSettings()
-        template = Template(file=os.path.join(self.webdir, 'main.tpl'), searchList=[searchList]);
+        template = Template(file=self.loadTemplateFile('main.tpl'), searchList=[searchList]);
         template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = ''
         template.jsfile = 'main.js'
@@ -112,10 +129,12 @@ class pageHandler:
 
         # Paths for filemanager
         searchList['availpaths'] = availpaths
+        searchList['availinterfaces'] = os.listdir(htpc.interfaces)
 
         # Fill template
-        template = Template(file=os.path.join(self.webdir, 'settings.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('settings.tpl'), searchList=[searchList])
         template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.jsfile = 'settings.js'
         template.submenu = 'settings'
@@ -134,9 +153,10 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'sabnzbd.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('sabnzbd.tpl'), searchList=[searchList])
         template.appname = self.appname
         template.jsfile = 'sabnzbd.js'
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'sabnzbd'
 
@@ -149,10 +169,11 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'sickbeard.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('sickbeard.tpl'), searchList=[searchList])
         template.jsfile = 'sickbeard.js'
 
         template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'sickbeard'
 
@@ -165,10 +186,11 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'couchpotato.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('couchpotato.tpl'), searchList=[searchList])
         template.jsfile = 'couchpotato.js'
 
         template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'couchpotato'
 
@@ -181,10 +203,11 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'xbmc.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('xbmc.tpl'), searchList=[searchList])
         template.jsfile = 'xbmc.js'
 
         template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'xbmc'
         template.page_can_search = 'yes'
@@ -198,9 +221,10 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'nzbsearch.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('nzbsearch.tpl'), searchList=[searchList])
         template.appname = self.appname
         template.jsfile = 'nzbsearch.js'
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'nzbsearch'
 
@@ -213,9 +237,10 @@ class pageHandler:
         searchList = htpc.settings.readSettings()
 
         # Template vullen
-        template = Template(file=os.path.join(self.webdir, 'filemanager.tpl'), searchList=[searchList])
+        template = Template(file=self.loadTemplateFile('filemanager.tpl'), searchList=[searchList])
         template.appname = self.appname
         template.jsfile = 'filemanager.js'
+        template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'filemanager'
 

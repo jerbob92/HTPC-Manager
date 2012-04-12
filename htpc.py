@@ -30,25 +30,66 @@ if config.has_key('my_username') and config.get('my_username') != '' and config.
 
 rootConfig.update(authDict)
 
+interfacefolder = 'default'
+if config.has_key('theme') and config.get('theme') != '':
+    interfacefolder = config.get('theme')
+
 appConfig = {
     '/':  rootConfig,
     '/favicon.ico' : {
         'tools.staticfile.on' : True,
-        'tools.staticfile.filename' : "interfaces/default/static/favicon.ico"
+        'tools.staticfile.filename' : "interfaces/" + htpc.defaultinterface + "/static/favicon.ico"
     },
     '/css': {
         'tools.staticdir.on' : True,
-        'tools.staticdir.dir' : "interfaces/default/static/css"
+        'tools.staticdir.dir' : "interfaces/" + htpc.defaultinterface + "/static/css"
     },
     '/js': {
         'tools.staticdir.on' : True,
-        'tools.staticdir.dir' : "interfaces/default/static/js"
+        'tools.staticdir.dir' : "interfaces/" + htpc.defaultinterface + "/static/js"
     },
     '/img': {
         'tools.staticdir.on' : True,
-        'tools.staticdir.dir' : "interfaces/default/static/img"
+        'tools.staticdir.dir' : "interfaces/" + htpc.defaultinterface + "/static/img"
     }
 }
+
+import os
+interfaceDefault = os.path.join(htpc.interfaces, htpc.defaultinterface)
+interfaceDefaultStatic = os.path.join(interfaceDefault, 'static/')
+interfaceTheme = os.path.join(htpc.interfaces, htpc.interfacefolder)
+interfaceThemeStatic = os.path.join(interfaceTheme, 'static/')
+
+if htpc.interfacefolder != htpc.defaultinterface:
+    cssFiles = os.listdir(os.path.join(interfaceDefaultStatic, 'css/'))
+    for file in cssFiles:
+        updatePath = os.path.join(interfaceThemeStatic, 'css/');
+        updateFile = os.path.join(updatePath, file)
+        if os.path.isfile(updateFile):
+            appConfig['/css/' + file] = {
+                'tools.staticfile.on' : True,
+                'tools.staticfile.filename' : "interfaces/" + htpc.interfacefolder + "/static/css/" + file
+            }
+
+    imgFiles = os.listdir(os.path.join(interfaceDefaultStatic, 'img/'))
+    for file in imgFiles:
+        updatePath = os.path.join(interfaceThemeStatic, 'img/');
+        updateFile = os.path.join(updatePath, file)
+        if os.path.isfile(updateFile):
+            appConfig['/img/' + file] = {
+                'tools.staticfile.on' : True,
+                'tools.staticfile.filename' : "interfaces/" + htpc.interfacefolder + "/static/img/" + file
+            }
+
+    jsFiles = os.listdir(os.path.join(interfaceDefaultStatic, 'js/'))
+    for file in jsFiles:
+        updatePath = os.path.join(interfaceThemeStatic, 'js/');
+        updateFile = os.path.join(updatePath, file)
+        if os.path.isfile(updateFile):
+            appConfig['/js/' + file] = {
+                'tools.staticfile.on' : True,
+                'tools.staticfile.filename' : "interfaces/" + htpc.interfacefolder + "/static/js/" + file
+            }
 
 # Page inladen
 page = htpc.pageHandler(htpc.root)

@@ -1,5 +1,8 @@
-#include $webdir + "/header.tpl"#
-
+#if $os.path.isfile($webdir):
+#include $webdir + "./header.tpl"#
+#else
+#include $defaultwebdir + "./header.tpl"#
+#end if
 
 <div class="container">
 
@@ -115,4 +118,8 @@
 
 </div>
 
-#include $webdir + "/footer.tpl"#
+#if $os.path.isfile($webdir):
+#include $webdir + "./footer.tpl"#
+#else
+#include $defaultwebdir + "./footer.tpl"#
+#end if
