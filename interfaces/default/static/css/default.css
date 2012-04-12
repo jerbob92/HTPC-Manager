@@ -108,7 +108,7 @@ h6.movie-title, h6.show-title {
     margin-right: 5px;
 }
 
-.modal {
+#modal_dialog.modal {
     width: 700px;
     margin-left: -350px;
 }

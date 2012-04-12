@@ -39,6 +39,15 @@
     </div>
 </div>
 
+<div id="block_dialog" class="modal hide">
+    <div class="modal-header">
+        <h3 class="modal-h3"></h3>
+    </div>
+    <div class="modal-body">
+
+    </div>
+</div>
+
 <div class="navbar navbar-fixed-top" id="navbar">
     <div class="navbar-inner">
         <div class="container">
@@ -113,34 +122,29 @@
 
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#"
-                           class="dropdown-toggle"
-                           data-toggle="dropdown">
-                            System
-                            <b class="caret"></b>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            #if $getVar('updateavailable', 'no') == "yes"
+                            <i class="icon-exclamation-sign icon-white"></i>
+                            #else
+                            <i class="icon-list icon-white"></i>
+                            #end if
                         </a>
                         <ul class="dropdown-menu">
+                            #if $getVar('updateavailable', 'no') == "yes"
                             <li>
-                                <a id="btn-restart" href="javascript:;">Restart</a>
+                                <a id="update_button" href="javascript:;"><i class="icon-exclamation-sign"></i> Update Avaliable</a>
+                            </li>
+                            #end if
+                            <li>
+                                <a id="btn-settings" href="/settings"><i class="icon-cog"></i> Settings</a>
                             </li>
                             <li>
-                                <a id="btn-shutdown" href="javascript:;">Shutdown</a>
+                                <a id="btn-restart" href="javascript:;"><i class="icon-off"></i> Restart</a>
+                            </li>
+                            <li>
+                                <a id="btn-shutdown" href="javascript:;"><i class="icon-refresh"></i> Shutdown</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-               <ul class="nav pull-right">
-                    #if $getVar('updateavailable', 'no') == "yes"
-                    <li>
-                        <a href="javascript:;" id="update_button" >Update Avaliable</a>
-                    </li>
-                    #end if
-                    #if $submenu == "settings"
-                    <li class="active">
-                    #else
-                    <li>
-                        #end if
-                        <a href="/settings">Settings</a>
                     </li>
                 </ul>
             </div>

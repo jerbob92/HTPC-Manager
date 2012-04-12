@@ -78,9 +78,10 @@ $(document).ready(function () {
                 type: 'get',
                 dataType: 'json',
                 beforeSend: function() {
-                    notifySuccess('Starting update...')
+                    blockPage('Installing update', '<img src="img/loader.gif" alt="loader" /> Please wait...');
                 },
                 success: function (data) {
+                    unblockPage();
                     if (data.update == 'success') {
                         notifySuccess('New version installed!');
                     }
@@ -219,4 +220,19 @@ function bytesToSize(bytes, precision) {
     } else {
         return bytes + ' B';
     }
+}
+
+function blockPage(title, content) {
+    $('#block_dialog').modal({
+        show: true,
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    $('#block_dialog').find('.modal-h3').html(title);
+    $('#block_dialog').find('.modal-body').html(content);
+}
+
+function unblockPage() {
+    $('#block_dialog').modal('hide')
 }
