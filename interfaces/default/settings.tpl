@@ -69,7 +69,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="nzb_ip">IP / Host</label>
                                 <div class="controls">
-                                    <input class="span3" id="nzb_ip" name="nzb_ip" type="text" value="$getVar('nzb_ip', '')" />
+                                    <input class="span3" id="nzb_ip" name="nzb_ip" type="text" value="$getVar('nzb_ip', '127.0.0.1')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -87,7 +87,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="nzb_port">Port</label>
                                 <div class="controls">
-                                    <input class="span1" id="nzb_port" name="nzb_port" type="text" value="$getVar('nzb_port', '')" />
+                                    <input class="span1" id="nzb_port" name="nzb_port" type="text" value="$getVar('nzb_port', '8080')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -140,7 +140,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="sb_ip">IP / Host</label>
                                 <div class="controls">
-                                    <input class="span3" id="sb_ip" name="sb_ip" type="text" value="$getVar('sb_ip', '')" />
+                                    <input class="span3" id="sb_ip" name="sb_ip" type="text" value="$getVar('sb_ip', '127.0.0.1')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -158,7 +158,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="sb_port">Port</label>
                                 <div class="controls">
-                                    <input class="span1" id="sb_port" name="sb_port" type="text" value="$getVar('sb_port', '')" />
+                                    <input class="span1" id="sb_port" name="sb_port" type="text" value="$getVar('sb_port', '8081')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -192,7 +192,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="cp_ip">IP / Host</label>
                                 <div class="controls">
-                                    <input class="span3" id="cp_ip" name="cp_ip" type="text" value="$getVar('cp_ip', '')" />
+                                    <input class="span3" id="cp_ip" name="cp_ip" type="text" value="$getVar('cp_ip', '127.0.0.1')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -210,7 +210,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="cp_port">Port</label>
                                 <div class="controls">
-                                    <input class="span1" id="cp_port" name="cp_port" type="text" value="$getVar('cp_port', '')" />
+                                    <input class="span1" id="cp_port" name="cp_port" type="text" value="$getVar('cp_port', '5050')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -244,7 +244,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="xbmc_ip">IP / Host</label>
                                 <div class="controls">
-                                    <input class="span3" id="xbmc_ip" name="xbmc_ip" type="text" value="$getVar('xbmc_ip', '')" />
+                                    <input class="span3" id="xbmc_ip" name="xbmc_ip" type="text" value="$getVar('xbmc_ip', '127.0.0.1')" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -262,7 +262,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="xbmc_port">Port</label>
                                 <div class="controls">
-                                    <input class="span1" id="xbmc_port" name="xbmc_port" type="text" value="$getVar('xbmc_port', '')" />
+                                    <input class="span1" id="xbmc_port" name="xbmc_port" type="text" value="$getVar('xbmc_port', '80')" />
                                 </div>
                             </div>
                         </fieldset>
