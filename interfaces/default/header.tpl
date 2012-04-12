@@ -139,10 +139,10 @@
                                 <a id="btn-settings" href="/settings"><i class="icon-cog"></i> Settings</a>
                             </li>
                             <li>
-                                <a id="btn-restart" href="javascript:;"><i class="icon-off"></i> Restart</a>
+                                <a id="btn-restart" href="javascript:;"><i class="icon-refresh"></i> Restart</a>
                             </li>
                             <li>
-                                <a id="btn-shutdown" href="javascript:;"><i class="icon-refresh"></i> Shutdown</a>
+                                <a id="btn-shutdown" href="javascript:;"><i class="icon-off"></i> Shutdown</a>
                             </li>
                         </ul>
                     </li>
