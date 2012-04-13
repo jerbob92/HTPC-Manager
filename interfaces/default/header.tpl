@@ -126,7 +126,7 @@
                             #if $getVar('updateavailable', 'no') == "yes"
                             <i id="update-icon" class="icon-exclamation-sign icon-white"></i>
                             #else
-                            <i class="icon-list icon-white"></i>
+                            <i class="icon-cog icon-white"></i>
                             #end if
                         </a>
                         <ul class="dropdown-menu">
