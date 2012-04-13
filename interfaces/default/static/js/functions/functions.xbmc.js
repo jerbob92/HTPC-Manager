@@ -72,7 +72,7 @@ function loadMovies(options) {
                 var movieItem = $('<li>').attr('title', movie.title);
                 movieItem.attr('id', movie.title);
                 movieItem.append(movieAnchor);
-                movieItem.append($('<h6>').addClass('movie-title').html(shortenText(movie.title, 15)));
+                movieItem.append($('<h6>').addClass('movie-title').html(shortenText(movie.title, 12)));
 
                 $('#movie-grid').append(movieItem);
                 $('#movie-loader').hide();
@@ -213,7 +213,7 @@ function loadXbmcShows(options) {
                 if ($('#show-grid').hasClass('banners')) {
                     showItem.append($('<h6>').addClass('show-title').html(show.title));
                 } else {
-                    showItem.append($('<h6>').addClass('show-title').html(shortenText(show.title, 15)));
+                    showItem.append($('<h6>').addClass('show-title').html(shortenText(show.title, 12)));
                 }
 
                 $('#show-grid').append(showItem);
