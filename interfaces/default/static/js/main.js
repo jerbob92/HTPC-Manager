@@ -57,7 +57,9 @@ function loadRecentMovies () {
                     itemDiv.addClass('active');
                 }
                 var itemImage = $('<img>');
-                itemImage.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&h=240&w=430');
+                itemImage.addClass('lazy');
+                itemImage.attr('src', 'img/white5x5.png');
+                itemImage.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.fanart) + '&h=240&w=430');
                 itemImage.attr('alt', movie.title);
                 itemImage.css({
                     width: '430px',
@@ -112,7 +114,9 @@ function loadRecentTVshows () {
                     itemDiv.addClass('active');
                 }
                 var itemImage = $('<img>');
-                itemImage.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&h=240&w=430');
+                itemImage.addClass('lazy');
+                itemImage.attr('src', 'img/white5x5.png');
+                itemImage.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.fanart) + '&h=240&w=430');
                 itemImage.attr('alt', epTitle);
                 itemImage.css({
                     width: '430px',

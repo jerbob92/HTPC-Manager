@@ -56,7 +56,9 @@ function loadMovies(options) {
                 var moviePicture = $('<img>');
                 moviePicture.css('height', '150px');
                 moviePicture.css('width', '100px');
-                moviePicture.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.thumbnail) + '&w=100&h=150');
+                moviePicture.attr('src', 'img/white5x5.png');
+                moviePicture.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(movie.thumbnail) + '&w=100&h=150');
+                moviePicture.addClass('lazy');
 
                 var movieAnchor = $('<a>');
                 movieAnchor.addClass('thumbnail');
@@ -182,12 +184,14 @@ function loadXbmcShows(options) {
             $.each(data.tvshows, function (i, show) {
 
                 var showPicture = $('<img>');
+                showPicture.attr('src', 'img/white5x5.png');
+                showPicture.addClass('lazy');
                 if ($('#show-grid').hasClass('banners')) {
-                    showPicture.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(show.thumbnail) + '&h=80&w=500');
+                    showPicture.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(show.thumbnail) + '&h=80&w=500');
                     showPicture.css('height', '90px');
                     showPicture.css('width', '500px');
                 } else {
-                    showPicture.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(show.thumbnail) + '&h=150&w=100');
+                    showPicture.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(show.thumbnail) + '&h=150&w=100');
                     showPicture.css('height', '150px');
                     showPicture.css('width', '100px');
                 }
@@ -313,9 +317,11 @@ function loadXBMCShow(show) {
                     var row = $('<tr>');
 
                     var episodeImage = $('<img>');
+                    episodeImage.addClass('lazy');
+                    episodeImage.attr('src', 'img/white5x5.png');
                     episodeImage.css('height', '50px');
                     episodeImage.css('width', '100px');
-                    episodeImage.attr('src', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.thumbnail) + '&w=100&h=50');
+                    episodeImage.attr('data-original', 'json/?which=xbmc&action=thumb&thumb=' + encodeURIComponent(episode.thumbnail) + '&w=100&h=50');
 
                     var episodeThumb = $('<a>').addClass('thumbnail');
                     episodeThumb.append(episodeImage);
@@ -356,9 +362,8 @@ function loadXBMCShow(show) {
 
             $('#show-seasons').html('').append(accordion);
 
-            $('#show-grid').slideUp(function () {
-                $('#show-details').slideDown();
-            });
+            $('#show-grid').fadeOut();
+            $('#show-details').show();
 
 
         }

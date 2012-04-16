@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
     enablePlayerControls();
-    loadNowPlaying();
     loadMovies();
     loadXbmcShows();
+    loadNowPlaying();
 
     $(window).scroll(function() {
         if($(window).scrollTop() + $(window).height() >= $(document).height() - 10) {
@@ -59,9 +59,8 @@ $(document).ready(function () {
 
     // Button setten
     $('#back-to-shows').click(function () {
-        $('#show-details').slideUp(function () {
-            $('#show-grid').slideDown();
-        });
+        $('#show-details').fadeOut();
+        $('#show-grid').show();
     });
 
     // Notificatie versturen

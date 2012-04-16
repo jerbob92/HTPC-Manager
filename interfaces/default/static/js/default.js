@@ -1,4 +1,5 @@
 var scriptArray = [
+    'js/jquery.lazyload.min.js',
     'js/jquery.form.js',
     'js/jquery.cookie.js',
     'js/bootstrap.min.js',
@@ -16,7 +17,20 @@ $.each(scriptArray, function (i, scripturl) {
 	$('head').append(script);
 });
 
+// Lazyload
+$(document).ajaxStop(function(){
+    $('img.lazy').lazyload({
+        effect: 'fadeIn'
+    }).removeClass('lazy');
+});
+
 $(document).ready(function () {
+
+    // trigger lazyload on tab click
+    $('a[data-toggle="tab"]').on('shown', function (e) {
+        $(window).trigger('scroll');
+    })
+
 
     $(".table-sortable").tablesorter();
 
@@ -36,6 +50,11 @@ $(document).ready(function () {
 
     // Carousel
     $('.carousel').carousel();
+
+    // trigger lazyload on carousel click
+    $('.carousel').on('slide', function (e) {
+        $(window).trigger('scroll');
+    })
 
     $('#notify-user').find('.close').click(function () {
         $('#notify-user').hide();
