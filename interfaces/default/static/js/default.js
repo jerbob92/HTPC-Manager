@@ -107,6 +107,8 @@ $(document).ready(function () {
                 unblockPage();
                 if (update) {
                     offerToUpdate();
+                } else {
+                    alert('No new version available.');
                 }
             }
         });
