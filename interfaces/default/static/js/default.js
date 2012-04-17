@@ -92,27 +92,48 @@ $(document).ready(function () {
     })
 
     $('#update_button').click(function () {
-        if (confirm('Install new version of HTPC-Manager?')) {
-            $.ajax({
-                url: 'json/?which=system&action=update',
-                type: 'get',
-                dataType: 'json',
-                beforeSend: function() {
-                    blockPage('Installing update', '<img src="img/loader.gif" alt="loader" /> Please wait...');
-                },
-                success: function (data) {
-                    unblockPage();
-                    if (data.update == 'success') {
-                        notifySuccess('New version installed!');
-                    }
+        offerToUpdate();
+    });
+
+    $('#check_update_button').click(function () {
+        $.ajax({
+            url: 'json/?which=system&action=checkupdate',
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                blockPage('Looking for update', '<img src="img/loader.gif" alt="loader" /> Please wait...');
+            },
+            success: function (update) {
+                unblockPage();
+                if (update) {
+                    offerToUpdate();
                 }
-            });
-        }
+            }
+        });
     });
 
     blink(900000, 1000);
 
 });
+
+function offerToUpdate() {
+    if (confirm('Install new version of HTPC-Manager?')) {
+        $.ajax({
+            url: 'json/?which=system&action=update',
+            type: 'get',
+            dataType: 'json',
+            beforeSend: function() {
+                blockPage('Installing update', '<img src="img/loader.gif" alt="loader" /> Please wait...');
+            },
+            success: function (data) {
+                unblockPage();
+                if (data.update == 'success') {
+                    notifySuccess('New version installed!');
+                }
+            }
+        });
+    }
+}
 
 // Blink update icon
 function blink(time, interval){

@@ -97,7 +97,7 @@ def CheckForUpdates():
         #raise cherrypy.HTTPRedirect("/") # no update available dont show anything
         data = { 'updateavailable': 'no' };
         saveSettings(data)
-        return True
+        return False
     else:
         #DownloadNewVersion() # Update Available and if they agree call DownloadNewVersion()
         data = { 'updateavailable': 'yes' };

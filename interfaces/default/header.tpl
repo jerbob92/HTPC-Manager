@@ -134,6 +134,10 @@
                             <li>
                                 <a id="update_button" href="javascript:;"><i class="icon-exclamation-sign"></i> Update Avaliable</a>
                             </li>
+                            #else
+                            <li>
+                                <a id="check_update_button" href="javascript:;"><i class="icon-eye-open"></i> Check for updates</a>
+                            </li>
                             #end if
                             <li>
                                 <a id="btn-settings" href="/settings"><i class="icon-cog"></i> Settings</a>

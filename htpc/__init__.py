@@ -385,3 +385,6 @@ class pageHandler:
                 CheckForUpdates()
                 cherrypy.server.start()
                 return dumps({'update' : 'success'})
+            if args.get('action') == 'checkupdate':
+                updateAvail = CheckForUpdates()
+                return dumps(updateAvail)
