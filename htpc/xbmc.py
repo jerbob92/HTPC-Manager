@@ -133,7 +133,7 @@ def xbmcGetMovies(limitstart=0,limitend=0,sortmethod='videotitle',sortorder='asc
     if config.has_key('sort_ignore_articles') and config.get('sort_ignore_articles') == 'yes':
         ignorearticle = True
     server = Server(xbmcMakeUrl() + '/jsonrpc')
-    data = server.VideoLibrary.GetMovies(sort={'order': sortorder, 'method' : sortmethod, 'ignorearticle' : ignorearticle}, properties=['title', 'year', 'plot', 'thumbnail', 'file', 'fanart', 'studio', 'trailer'], limits={'start' : int(limitstart), 'end' : int(limitend)})
+    data = server.VideoLibrary.GetMovies(sort={'order': sortorder, 'method' : sortmethod, 'ignorearticle' : ignorearticle}, properties=['title', 'year', 'plot', 'thumbnail', 'file', 'fanart', 'studio', 'trailer', 'genre', 'rating'], limits={'start' : int(limitstart), 'end' : int(limitend)})
     return dumps(data)
 
 def xbmcGetShows(limitstart=0,limitend=0,sortmethod='videotitle',sortorder='ascending'):
@@ -216,7 +216,7 @@ def xbmcNotify(text):
 
 def xbmcGetRecentMovies():
     server = Server(xbmcMakeUrl() + '/jsonrpc')
-    data = server.VideoLibrary.GetRecentlyAddedMovies(properties=['title', 'year', 'plot', 'thumbnail', 'file', 'fanart', 'studio', 'trailer'])
+    data = server.VideoLibrary.GetRecentlyAddedMovies(properties=['title', 'year', 'plot', 'thumbnail', 'file', 'fanart', 'studio', 'trailer', 'genre', 'rating'])
     return dumps(data)
 
 def xbmcGetRecentShows():

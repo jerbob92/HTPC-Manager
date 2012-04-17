@@ -5,6 +5,7 @@ var scriptArray = [
     'js/bootstrap.min.js',
     'js/jquery.metadata.js',
     'js/jquery.tablesorter.min.js',
+    'js/jquery.raty.min.js',
     'js/functions/functions.xbmc.js',
     'js/functions/functions.sickbeard.js',
     'js/functions/functions.sabnzbd.js'

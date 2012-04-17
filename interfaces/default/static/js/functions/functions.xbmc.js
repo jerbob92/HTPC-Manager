@@ -102,12 +102,31 @@ function xbmcShowMovie(movie) {
     modalMoviePoster.css('width', '200px');
     modalMoviePoster.append(modalMovieAnchor);
 
-    var modalPlot = $('<td>');
-    modalPlot.html(movie.plot + '<h6><br />' + movie.studio + '</h6>');
+    var moviePlot = $('<p>');
+    moviePlot.html(movie.plot);
+
+    var movieStudio = $('<h6>');
+    movieStudio.html(movie.studio);
+
+    var movieGenre = $('<h6>');
+    movieGenre.html(movie.genre);
+
+    var movieRating = $('<div>');
+    movieRating.raty({
+        readOnly: true,
+        start: (movie.rating / 2),
+        number: 5
+    });
+
+    var modalMovieInfo = $('<td>');
+    modalMovieInfo.append(moviePlot);
+    modalMovieInfo.append(movieRating);
+    modalMovieInfo.append(movieStudio);
+    modalMovieInfo.append(movieGenre);
 
     var row = $('<tr>');
     row.append(modalMoviePoster);
-    row.append(modalPlot)
+    row.append(modalMovieInfo)
 
     var table = $('<table>');
     table.addClass('table table-modal');

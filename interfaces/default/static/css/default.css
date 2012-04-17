@@ -85,6 +85,11 @@ h6.movie-title, h6.show-title {
     padding-top: 4px;
 }
 
+.table-modal h6 {
+    margin-top: 2px;
+    color: #555555;
+}
+
 .gif-loader {
     text-align: center;
     display: none;
