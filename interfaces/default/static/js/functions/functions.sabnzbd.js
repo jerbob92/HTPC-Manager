@@ -57,6 +57,7 @@ function loadHistory() {
                 failMessage.addClass('label');
                 failMessage.addClass('label-important');
                 failMessage.html(slot.fail_message);
+                failMessage.find('a').remove();
 
                 var row = $('<tr>')
                 if (slot.status == 'Failed') {
