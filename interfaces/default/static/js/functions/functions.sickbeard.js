@@ -96,9 +96,12 @@ function loadNextAired(options) {
                 return false;
             }
 
-            if (result.data.soon.legth == 0) {
+            if (result.data.soon.length == 0) {
                 var row = $('<tr>')
                 row.append($('<td>').html('No future episodes found'));
+                row.append($('<td>'));
+                row.append($('<td>'));
+                row.append($('<td>'));
                 $('#nextaired_table_body').append(row);
                 return false;
             }
