@@ -90,6 +90,16 @@ if htpc.interfacefolder != htpc.defaultinterface:
                 'tools.staticfile.on' : True,
                 'tools.staticfile.filename' : "interfaces/" + htpc.interfacefolder + "/static/js/" + file
             }
+			
+	jsFunctionFiles = os.listdir(os.path.join(interfaceDefaultStatic, 'js/functions/'))
+    for file in jsFunctionFiles:
+        updatePath = os.path.join(interfaceThemeStatic, 'js/functions/');
+        updateFile = os.path.join(updatePath, file)
+        if os.path.isfile(updateFile):
+            appConfig['/js/functions/' + file] = {
+                'tools.staticfile.on' : True,
+                'tools.staticfile.filename' : "interfaces/" + htpc.interfacefolder + "/static/js/functions/" + file
+            }
 
 # Page inladen
 page = htpc.pageHandler(htpc.root)
