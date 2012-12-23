@@ -134,3 +134,7 @@ h6.movie-title, h6.show-title {
     zoom: 1;
 }
 
+.bar{
+    overflow: hidden;
+    text-overflow: clipped;
+}

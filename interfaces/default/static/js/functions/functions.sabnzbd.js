@@ -147,7 +147,7 @@ function loadQueue(once) {
 
                 var progressBar = $('<div>');
                 progressBar.addClass('bar');
-                progressBar.css('width', job.percentage + '%');
+                progressBar.css('width', job.percentage + '%').text(job.percentage + '%');
 
                 var  progress = $('<div>');
                 progress.addClass('progress');
