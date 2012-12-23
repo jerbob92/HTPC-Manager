@@ -71,8 +71,12 @@ function loadShow(tvdbid) {
             row = $('<tr>');
             row.append('<th>Network</th><td>' + data.network + '</td>');
             table.append(row);
+            
+            var img = $('<img>').attr('src', '/json/?which=sickbeard&action=getbanner&tvdbid=' + tvdbid).attr('style', 'max-width: 100%;');
+            
+            var content = $('<div>').append(img).append($('<hr />')).append(table);
 
-            showModal(data.show_name, table, {});
+            showModal(data.show_name, content, {});
         }
     });
 }
