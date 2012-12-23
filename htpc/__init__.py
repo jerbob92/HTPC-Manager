@@ -281,6 +281,8 @@ class pageHandler:
                 return sbGetNextAired()
             if args.get('action') == 'getposter':
                 return sbGetPoster(args.get('tvdbid'))
+            if args.get('action') == 'getbanner':
+                return sbGetBanner(args.get('tvdbid'))
             if args.get('action') == 'history':
                 return sbGetHistory(args.get('limit'))
             if args.get('action') == 'searchtvdb':
