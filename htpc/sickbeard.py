@@ -26,6 +26,10 @@ def sbGetNextAired():
 def sbGetPoster(tvdbid):
     data = sbFetchDataFromUrl(sbMakeUrl('show.getposter&tvdbid=' + str(tvdbid)))
     return data
+	
+def sbGetBanner(tvdbid):
+    data = sbFetchDataFromUrl(sbMakeUrl('show.getbanner&tvdbid=' + str(tvdbid)))
+    return data
 
 def sbGetHistory(limit):
     data = sbFetchDataFromUrl(sbMakeUrl('history&limit=' + limit))
