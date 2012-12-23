@@ -1,4 +1,4 @@
-#if $os.path.isfile($webdir):
+#if $os.path.isfile($webdir + "./header.tpl"):
 #include $webdir + "./header.tpl"#
 #else
 #include $defaultwebdir + "./header.tpl"#
@@ -92,7 +92,7 @@
     </div>
 </div>
 
-#if $os.path.isfile($webdir):
+#if $os.path.isfile($webdir + "./footer.tpl"):
 #include $webdir + "./footer.tpl"#
 #else
 #include $defaultwebdir + "./footer.tpl"#
