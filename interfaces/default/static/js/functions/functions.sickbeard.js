@@ -32,7 +32,8 @@ function loadShows() {
             });
 
             $('#tvshows_table_body').parent().trigger('update');
-
+            // Trigger sort by first column (showname)
+            $('#tvshows_table_body').parent().trigger("sorton",[[[0,0]]]);
         }
     });
 }
