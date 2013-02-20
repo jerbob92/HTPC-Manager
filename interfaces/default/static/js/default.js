@@ -1,14 +1,14 @@
 var scriptArray = [
-    'js/jquery.lazyload.min.js',
-    'js/jquery.form.js',
-    'js/jquery.cookie.js',
-    'js/bootstrap.min.js',
-    'js/jquery.metadata.js',
-    'js/jquery.tablesorter.min.js',
-    'js/jquery.raty.min.js',
-    'js/functions/functions.xbmc.js',
-    'js/functions/functions.sickbeard.js',
-    'js/functions/functions.sabnzbd.js'
+    '/js/jquery.lazyload.min.js',
+    '/js/jquery.form.js',
+    '/js/jquery.cookie.js',
+    '/js/bootstrap.min.js',
+    '/js/jquery.metadata.js',
+    '/js/jquery.tablesorter.min.js',
+    '/js/jquery.raty.min.js',
+    '/js/functions/functions.xbmc.js',
+    '/js/functions/functions.sickbeard.js',
+    '/js/functions/functions.sabnzbd.js'
 ];
 
 //scripts inladen
@@ -64,7 +64,7 @@ $(document).ready(function () {
     $('#btn-shutdown').click(function () {
         if (confirm('Are you sure?')) {
             $.ajax({
-                url: 'json/?which=system&action=shutdown',
+                url: '/json/?which=system&action=shutdown',
                 type: 'get',
                 dataType: 'json',
                 beforeSend: function() {
@@ -76,7 +76,7 @@ $(document).ready(function () {
     $('#btn-restart').click(function () {
         if (confirm('Are you sure?')) {
             $.ajax({
-                url: 'json/?which=system&action=restart',
+                url: '/json/?which=system&action=restart',
                 type: 'get',
                 dataType: 'json',
                 beforeSend: function() {
@@ -97,7 +97,7 @@ $(document).ready(function () {
 
     $('#check_update_button').click(function () {
         $.ajax({
-            url: 'json/?which=system&action=checkupdate',
+            url: '/json/?which=system&action=checkupdate',
             type: 'get',
             dataType: 'json',
             beforeSend: function() {
@@ -121,7 +121,7 @@ $(document).ready(function () {
 function offerToUpdate() {
     if (confirm('Install new version of HTPC-Manager?')) {
         $.ajax({
-            url: 'json/?which=system&action=update',
+            url: '/json/?which=system&action=update',
             type: 'get',
             dataType: 'json',
             beforeSend: function() {
