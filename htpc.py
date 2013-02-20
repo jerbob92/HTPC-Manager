@@ -2,7 +2,7 @@ import cherrypy
 import htpc
 
 cherrypy.config.update({
-    'server.environment': 'production',
+    'environment': 'production',
     'server.socket_host': htpc.host,
     'server.socket_port': htpc.port,
     'server.root' : htpc.root
