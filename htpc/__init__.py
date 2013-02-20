@@ -46,14 +46,15 @@ def CheckUpdateSchedule():
     data = config.get('updateavailable')
     return data  
     
-class pageHandler:
+class Root(object):
+  
     def __init__(self, root):
 
         self.root = root
         self.webdir = os.path.join(self.root, 'interfaces/' + interfacefolder + '/')
         self.defaultwebdir = os.path.join(self.root, 'interfaces/' + defaultinterface + '/')
         self.appname = 'HTPC Manager'
-        my_scheduler.start()
+
 
     def loadTemplateFile(self, template):
         if os.path.isfile(os.path.join(self.webdir, template)):
@@ -61,6 +62,48 @@ class pageHandler:
         else:
             tpl = os.path.join(self.defaultwebdir, template)
         return tpl
+
+class Sickbeard(Root):
+
+    def index(self):
+        # Searchlist voor template ophalen
+        searchList = htpc.settings.readSettings()
+
+        # Template vullen
+        template = Template(file=self.loadTemplateFile('sickbeard/index.tpl'), searchList=[searchList])
+        template.jsfile = 'sickbeard.js'
+
+        template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
+        template.webdir = self.webdir
+        template.submenu = 'sickbeard'
+
+        return template.respond()
+    index.exposed = True;
+    
+    def show(self, show_id):
+        # Searchlist voor template ophalen
+        searchList = htpc.settings.readSettings()
+
+        # Template vullen
+        template = Template(file=self.loadTemplateFile('sickbeard/show.tpl'), searchList=[searchList])
+        template.jsfile = 'sickbeard_show.js'
+
+        template.appname = self.appname
+        template.defaultwebdir = self.defaultwebdir
+        template.webdir = self.webdir
+        template.submenu = 'sickbeard'
+        
+        if not (show_id.isdigit()):
+          raise cherrypy.HTTPError("500 Error", "Invalid show ID.")
+          return False
+        
+        template.show_id = show_id
+        return template.respond()
+    show.exposed = True;
+
+    
+class pageHandler(Root): 
 
     @cherrypy.expose()
     def index(self):
@@ -159,23 +202,6 @@ class pageHandler:
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'sabnzbd'
-
-        return template.respond()
-
-    @cherrypy.expose()
-    def sickbeard(self, **args):
-
-        # Searchlist voor template ophalen
-        searchList = htpc.settings.readSettings()
-
-        # Template vullen
-        template = Template(file=self.loadTemplateFile('sickbeard.tpl'), searchList=[searchList])
-        template.jsfile = 'sickbeard.js'
-
-        template.appname = self.appname
-        template.defaultwebdir = self.defaultwebdir
-        template.webdir = self.webdir
-        template.submenu = 'sickbeard'
 
         return template.respond()
 

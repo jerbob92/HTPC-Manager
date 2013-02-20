@@ -2,7 +2,7 @@ import cherrypy
 import htpc
 
 cherrypy.config.update({
-    'environment': 'production',
+    'server.environment': 'production',
     'server.socket_host': htpc.host,
     'server.socket_port': htpc.port,
     'server.root' : htpc.root
@@ -104,8 +104,11 @@ if htpc.interfacefolder != htpc.defaultinterface:
 # Page inladen
 page = htpc.pageHandler(htpc.root)
 
+sb = htpc.Sickbeard(htpc.root)
+
 # Root mounten
 cherrypy.tree.mount(page, "/", config=appConfig)
+cherrypy.tree.mount(sb, "/sickbeard", config=appConfig)
 
 # Cherrypy starten
 cherrypy.process.servers.check_port(htpc.host, htpc.port)
