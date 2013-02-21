@@ -245,18 +245,28 @@ function notify(title, text) {
 
 function notifyWarning(title, text) {
     $('#notify-user').removeClass('alert-info')
+    $('#notify-user').removeClass('alert-error')
     $('#notify-user').removeClass('alert-success')
+    notify(title, text)
+}
+
+function notifyError(title, text) {
+    $('#notify-user').removeClass('alert-info')
+    $('#notify-user').removeClass('alert-success')
+    $('#notify-user').addClass('alert-error')
     notify(title, text)
 }
 
 function notifyInfo(title, text) {
     $('#notify-user').removeClass('alert-success')
+    $('#notify-user').removeClass('alert-error')
     $('#notify-user').addClass('alert-info')
     notify(title, text)
 }
 
 function notifySuccess(title, text) {
     $('#notify-user').removeClass('alert-info')
+    $('#notify-user').removeClass('alert-error')
     $('#notify-user').addClass('alert-success')
     notify(title, text)
 }
