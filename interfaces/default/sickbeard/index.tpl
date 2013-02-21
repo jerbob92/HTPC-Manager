@@ -14,6 +14,10 @@
                 $getVar('sb_name', 'SickBeard')
             </h1>
         </div>
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a> <span class="divider">/</span></li>
+          <li class="active">$getVar('sb_name', 'SickBeard')</li>
+        </ul>
 
         <div id="notification_area"></div>
 
