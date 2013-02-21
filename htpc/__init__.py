@@ -74,6 +74,7 @@ class Sickbeard(Root):
         template.jsfile = 'sickbeard.js'
 
         template.appname = self.appname
+        template.pagetitle = config.get('sb_name')
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'sickbeard'
@@ -90,6 +91,7 @@ class Sickbeard(Root):
         template.jsfile = 'sickbeard_show.js'
 
         template.appname = self.appname
+        template.pagetitle = 'Sickbeard show details'
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'sickbeard'
@@ -177,6 +179,7 @@ class pageHandler(Root):
         # Fill template
         template = Template(file=self.loadTemplateFile('settings.tpl'), searchList=[searchList])
         template.appname = self.appname
+        template.pagetitle = 'Settings'
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.jsfile = 'settings.js'
@@ -198,6 +201,7 @@ class pageHandler(Root):
         # Template vullen
         template = Template(file=self.loadTemplateFile('sabnzbd.tpl'), searchList=[searchList])
         template.appname = self.appname
+        template.pagetitle = config.get('nzb_name')
         template.jsfile = 'sabnzbd.js'
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
@@ -233,6 +237,7 @@ class pageHandler(Root):
         template.jsfile = 'xbmc.js'
 
         template.appname = self.appname
+        template.pagetitle = config.get('xbmc_name')
         template.defaultwebdir = self.defaultwebdir
         template.webdir = self.webdir
         template.submenu = 'xbmc'
@@ -318,7 +323,9 @@ class pageHandler(Root):
             if args.get('action') == 'addshow':
                 return sbAddShow(args.get('tvdbid'))
             if args.get('action') == 'getshow':
-                return sbGetShow(args.get('tvdbid'))
+                return sbGetShow(args.get('tvdbid'))        
+            if args.get('action') == 'getseason':            
+                return sbGetSeason(args.get('tvdbid'), args.get('season'))
 
         if args.get('which') == 'couchpotato':
             if args.get('action') == 'movie.list':
