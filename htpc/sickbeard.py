@@ -53,3 +53,7 @@ def sbAddShow(tvdbid):
 def sbGetShow(tvdbdid):
     data = sbFetchDataFromUrl(sbMakeUrl('show&tvdbid=' + tvdbdid))
     return data
+    
+def sbGetSeason(tvdbdid, seasonNr):
+    data = sbFetchDataFromUrl(sbMakeUrl('show.seasons&tvdbid=' + tvdbdid + '&season=' + seasonNr))
+    return data
