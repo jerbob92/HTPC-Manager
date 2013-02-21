@@ -5,53 +5,47 @@
 #end if
 
 
-<div class="container">
+<div class="container sickbeard_show">
 
     <div class="content maincontent">
 
         <div class="page-header page-title">
             <h1>
-                 <span class="sickbeard_showname">Show details</span>
+                 <span class="sickbeard_showname">Show</span> 
                  <small>
-                   $getVar('sb_name', 'SickBeard')
-                   show details
+                   Details
                  </small>
-                 <span class="pull-right sickbeard_next_air"></span>
             </h1>
         </div>
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a> <span class="divider">/</span></li>
+          <li><a href="/sickbeard">$getVar('sb_name', 'SickBeard')</a> <span class="divider">/</span></li>
+          <li class="active sickbeard_showname">Show details</li>
+        </ul>
 
         <div id="notification_area"></div>
-        
-        
-        <div>
-          <div>
-          </div>
-          <img src="/json/?which=sickbeard&action=getbanner&tvdbid=$show_id" class="img-rounded" />
-        </div>
-        
 
-        <div class="" style="
-        background:url('/json/?which=sickbeard&action=getbanner&tvdbid=$show_id') 100% 100% no-repeat;
-              -webkit-background-size: cover; /*for webKit*/
-        -moz-background-size: cover; /*Mozilla*/
-        -o-background-size: cover; /*opera*/
-        background-size: cover; /*generic*/
-        ">
-          <div class="" style="background:rgba(255, 255, 255, 0.8);">
-          <h3>Show details</h3>
-            <table class="table ">
-              <tr>
-                <td>Language</td><td class="sickbeard_language"/>
-                <td>Status</td><td class="sickbeard_status"/>
-              </tr>
-              <tr>       
-                <td>Airs</td><td class="sickbeard_airs"/>
-                <td>Network</td><td class="sickbeard_network"/>
-              </tr>
-              <tr>
-               <td>Location</td><td class="sickbeard_location"/>
-              </tr>
-            </table>
+        <div class="row-fluid banner" style="background-image:url(/json/?which=sickbeard&action=getbanner&tvdbid=$show_id);">
+          <div class="span8"></div>
+          <div class="show_details span4">
+              <strong>Show details</strong>
+                <table class="table table-condensed">
+                  <tr>
+                   <td>Next episode</td><td class="sickbeard_next_air"/>
+                  </tr>
+                  <tr>
+                    <td>Network</td><td class="sickbeard_network"/>
+                  </tr>
+                  <tr>
+                    <td>Status</td><td class="sickbeard_status"/>
+                  </tr>
+                  <tr>       
+                    <td>Airs</td><td class="sickbeard_airs"/>
+                  </tr>
+                  <tr>
+                   <td>Location</td><td class="sickbeard_location"/>
+                  </tr>
+                </table>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 html, body {
     background-color: #eee;
-    background: url('../img/rough_diagonal.png')
+    background: url('../img/rough_diagonal.png');
+    min-width: 320px;
 }
 body {
     padding-top: 40px;
@@ -137,4 +138,31 @@ h6.movie-title, h6.show-title {
 .bar{
     overflow: hidden;
     text-overflow: clipped;
+}
+
+
+.sickbeard_show .banner{
+  position: relative;
+  border-radius: 6px; 
+  background:  center left no-repeat ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.sickbeard_show .banner .show_details {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+    color: White;
+    border-radius: 6px;
+    overflow:hidden;
+}
+
+.sickbeard_show .banner .show_details td{
+  padding: 2px 5px;
+}
+
+.sickbeard_show .banner .show_details table,
+.sickbeard_show .banner .show_details strong {
+  margin:10px;
 }
