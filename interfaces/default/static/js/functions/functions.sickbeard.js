@@ -264,6 +264,9 @@ function cancelAddShow() {
 
 function sickbeardFormatDate(inputDate){
   var split=inputDate.split('-');
+  if (split.length != 3) {
+    return inputDate;
+  }
   return split[2]+'-'+split[1]+'-'+split[0];
 }
 
