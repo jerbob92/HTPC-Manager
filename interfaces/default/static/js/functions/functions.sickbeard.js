@@ -265,8 +265,9 @@ function sickbeardFormatDate(inputDate){
 
 function sickbeardStatusLabel(text){
   var statusOK = ['Continuing', 'Downloaded'];
-  var statusInfo = ['Snatched'];  
+  var statusInfo = ['Snatched', 'Unaired'];  
   var statusError = ['Ended'];
+  var statusWarning = ['Skipped'];
   
   var label = $('<span>').addClass('label').text(text);
   
@@ -279,6 +280,9 @@ function sickbeardStatusLabel(text){
   else if (statusError.indexOf(text) != -1) {
     label.addClass('label-important');
   }
+  else if (statusWarning.indexOf(text) != -1) {
+    label.addClass('label-warning');
+  }
   
   var icon = sickbeardStatusIcon(text, true);
   label.prepend(' ').prepend(icon);
@@ -289,12 +293,16 @@ function sickbeardStatusIcon(iconText, white){
   var text =[
     'Downloaded',
     'Continuing',
-    'Snatched'
+    'Snatched',
+    'Unaired',
+    'Archived'
   ];
   var icons = [
     'icon-download-alt',
     'icon-refresh',
-    'icon-share-alt'
+    'icon-share-alt',
+    'icon-time',
+    'icon-lock'
   ];
   
   if (text.indexOf(iconText) != -1) {
