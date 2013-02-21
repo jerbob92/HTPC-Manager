@@ -239,7 +239,7 @@ function notify(title, text) {
     $('#notify-user').fadeIn(function () {
         setTimeout(function () {
             $('#notify-user').fadeOut();
-        }, 2000);
+        }, 3000);
     });
 }
 
