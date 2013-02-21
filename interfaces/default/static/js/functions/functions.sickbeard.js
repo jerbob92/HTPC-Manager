@@ -18,6 +18,10 @@ function loadShows() {
                 infoIcon.click(function () {
                     loadShow(tvdbid);
                 });
+                
+                var detailLink = $('<a>');
+                detailLink.html('show');
+                detailLink.attr('href', '/sickbeard/show/'+tvdbid);
 
                 var row = $('<tr>')
                 row.append($('<td>').html(tvshow.show_name));
@@ -25,7 +29,7 @@ function loadShows() {
                 row.append($('<td>').html(tvshow.next_ep_airdate));
                 row.append($('<td>').html(tvshow.network));
                 row.append($('<td>').html(tvshow.quality));
-                row.append($('<td>').append(infoIcon));
+                row.append($('<td>').append(infoIcon).append(detailLink));
 
                 $('#tvshows_table_body').append(row);
 
