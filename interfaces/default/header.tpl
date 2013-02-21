@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<div class="navbar navbar-fixed-top" id="navbar">
+<div class="navbar navbar-fixed-top navbar-inverse" id="navbar">
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
