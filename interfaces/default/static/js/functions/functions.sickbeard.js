@@ -299,14 +299,16 @@ function sickbeardStatusIcon(iconText, white){
     'Continuing',
     'Snatched',
     'Unaired',
-    'Archived'
+    'Archived',
+    'Skipped'
   ];
   var icons = [
     'icon-download-alt',
     'icon-refresh',
     'icon-share-alt',
     'icon-time',
-    'icon-lock'
+    'icon-lock',
+    'icon-fast-forward'
   ];
   
   if (text.indexOf(iconText) != -1) {
