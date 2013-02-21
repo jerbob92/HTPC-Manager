@@ -26,7 +26,7 @@ function loadShows() {
                 var row = $('<tr>')
                 row.append($('<td>').html(tvshow.show_name));
                 row.append($('<td>').html(tvshow.status));
-                row.append($('<td>').html(tvshow.next_ep_airdate));
+                row.append($('<td>').html(sickbeardFormatDate(tvshow.next_ep_airdate)));
                 row.append($('<td>').html(tvshow.network));
                 row.append($('<td>').html(tvshow.quality));
                 row.append($('<td>').append(infoIcon).append(detailLink));
@@ -135,7 +135,7 @@ function loadNextAired(options) {
                 var row = $('<tr>');
                 row.append($('<td>').html(tvshow.show_name));
                 row.append($('<td>').html(tvshow.season + 'x' + tvshow.episode + ' - ' + tvshow.ep_name));
-                row.append($('<td>').html(tvshow.airdate));
+                row.append($('<td>').html(sickbeardFormatDate(tvshow.airdate)));
                 row.append($('<td>').append(infoIcon));
 
                 $('#nextaired_table_body').append(row);
@@ -260,5 +260,10 @@ function cancelAddShow() {
     $('#add_show_name').fadeIn();
     $('#add_tvdbid_button').hide();
     $('#add_show_button').show();
+}
+
+function sickbeardFormatDate(inputDate){
+  var split=inputDate.split('-');
+  return split[2]+'-'+split[1]+'-'+split[0];
 }
 

@@ -12,7 +12,7 @@ function loadShowData(showid){
       $('.sickbeard_location').html(data.location);
       $('.sickbeard_airs').html(data.airs);
       if (data.next_ep_airdate != '') {
-        $('.sickbeard_next_air').html('Next: '+data.next_ep_airdate);
+        $('.sickbeard_next_air').html('Next: '+sickbeardFormatDate(data.next_ep_airdate));
       }
     }
   });
