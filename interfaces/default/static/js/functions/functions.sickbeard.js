@@ -12,24 +12,20 @@ function loadShows() {
             }
             $.each(result.data, function (tvdbid, tvshow) {
 
-                var infoIcon = $('<i>');
-                infoIcon.addClass('icon-info-sign');
-                infoIcon.css('cursor', 'pointer');
+                var infoIcon = $('<i>').addClass('icon-info-sign').css('cursor', 'pointer');
                 infoIcon.click(function () {
                     loadShow(tvdbid);
                 });
                 
-                var detailLink = $('<a>');
-                detailLink.html('show');
-                detailLink.attr('href', '/sickbeard/show/'+tvdbid);
+                var detailLink = $('<a>').text(tvshow.show_name).attr('href', '/sickbeard/show/'+tvdbid);
 
                 var row = $('<tr>')
-                row.append($('<td>').html(tvshow.show_name));
+                row.append($('<td>').append(detailLink));
                 row.append($('<td>').html(sickbeardStatusLabel(tvshow.status)));
                 row.append($('<td>').html(sickbeardFormatDate(tvshow.next_ep_airdate)));
                 row.append($('<td>').html(tvshow.network));
                 row.append($('<td>').html(tvshow.quality));
-                row.append($('<td>').append(infoIcon).append(detailLink));
+                row.append($('<td>').append(infoIcon));
 
                 $('#tvshows_table_body').append(row);
 
@@ -125,15 +121,15 @@ function loadNextAired(options) {
                     return false;
                 }
 
-                var infoIcon = $('<i>');
-                infoIcon.addClass('icon-info-sign');
-                infoIcon.css('cursor', 'pointer');
+                var infoIcon = $('<i>').addClass('icon-info-sign').css('cursor', 'pointer');
                 infoIcon.click(function () {
                     loadShow(tvshow.tvdbid);
                 });
 
+                var detailLink = $('<a>').text(tvshow.show_name).attr('href', '/sickbeard/show/'+tvshow.tvdbid);
+                
                 var row = $('<tr>');
-                row.append($('<td>').html(tvshow.show_name));
+                row.append($('<td>').append(detailLink));
                 row.append($('<td>').html(tvshow.season + 'x' + tvshow.episode + ' - ' + tvshow.ep_name));
                 row.append($('<td>').html(sickbeardFormatDate(tvshow.airdate)));
                 row.append($('<td>').append(infoIcon));
@@ -163,10 +159,12 @@ function loadSbHistory(limit) {
             }
 
             $.each(result.data, function (tvdbid, tvshow) {
-
+            
+                var detailLink = $('<a>').text(tvshow.show_name).attr('href', '/sickbeard/show/'+tvshow.tvdbid);
+                
                 var row = $('<tr>');
                 row.append($('<td>').html(tvshow.date));
-                row.append($('<td>').html(tvshow.show_name));
+                row.append($('<td>').html(detailLink));
                 row.append($('<td>').html(tvshow.season + 'x' + tvshow.episode));
                 row.append($('<td>').html(sickbeardStatusLabel(tvshow.status)));
                 row.append($('<td>').html(tvshow.quality));
