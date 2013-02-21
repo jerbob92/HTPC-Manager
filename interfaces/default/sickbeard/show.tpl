@@ -49,86 +49,26 @@
           </div>
         </div>
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#tvshows" data-toggle="tab">TV Shows</a></li>
-            <li><a href="#nextaired" data-toggle="tab">Next aired</a></li>
-            <li><a href="#history" data-toggle="tab">History</a></li>
-            <li><a href="#log" data-toggle="tab">Log</a></li>
-        </ul>
-
-        <div class="tab-content">
-
-            <div id="tvshows" class="tab-pane active">
-
-                <table class="table table-striped table-sortable">
-                    <thead>
-                    <tr>
-                        <th>Showname</th>
-                        <th>Status</th>
-                        <th>Next ep</th>
-                        <th>Network</th>
-                        <th>Quality</th>
-                        <th class="{sorter: false}">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tvshows_table_body">
-
-                    </tbody>
-                </table>
-
-            </div>
-
-            <div id="nextaired" class="tab-pane">
-
-                <table class="table table-striped table-sortable">
-                    <thead>
-                    <tr>
-                        <th>Showname</th>
-                        <th>Episode</th>
-                        <th>Airdate</th>
-                        <th class="{sorter: false}">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody id="nextaired_table_body">
-
-                    </tbody>
-                </table>
-
-            </div>
-
-            <div id="history" class="tab-pane">
-
-                <table class="table table-striped table-sortable">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Showname</th>
-                        <th>Episode</th>
-                        <th>Status</th>
-                        <th>Quality</th>
-                    </tr>
-                    </thead>
-                    <tbody id="history_table_body">
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="log" class="tab-pane">
-
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>Logitem</th>
-                    </tr>
-                    </thead>
-                    <tbody id="log_table_body">
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+        <div class="page-header">
+            <h2>Seasons</h2>
+        </div>  
+        <ul class="nav nav-pills" id="season-list"></ul>
+        
+        <table class="table table-striped table-condensed table-sortable">
+          <thead>
+            <tr>
+              <th>Episode</th>
+              <th>Name</th>
+              <th>Airdate</th>
+              <th>status</th>
+              <th>Quality</th>
+            </tr>
+          </thead>
+          
+          <tbody id="season-content">
+          </tbody>
+        </table>
+        
     </div>
 </div>
 <script type="text/javascript">
