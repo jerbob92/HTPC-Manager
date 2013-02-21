@@ -148,7 +148,9 @@ function loadSbHistory(limit) {
                 var detailLink = $('<a>').text(tvshow.show_name).attr('href', '/sickbeard/show/'+tvshow.tvdbid);
                 
                 var row = $('<tr>');
-                row.append($('<td>').html(tvshow.date));
+                row.append($('<td>').html(
+                  sickbeardFormatDate(tvshow.date)
+                ));
                 row.append($('<td>').html(detailLink));
                 row.append($('<td>').html(tvshow.season + 'x' + tvshow.episode));
                 row.append($('<td>').html(sickbeardStatusLabel(tvshow.status)));
@@ -250,7 +252,15 @@ function sickbeardFormatDate(inputDate){
   if (split.length != 3) {
     return inputDate;
   }
-  return split[2]+'-'+split[1]+'-'+split[0];
+  
+  var time = '';
+  // Add time if input string has a space after the day, indicating it is followed by a time
+  if (split[2].length > 3) {
+    timeSplit = split[2].split(' ');
+    split[2] = timeSplit[0];
+    time = ' ' + timeSplit[1];
+  }
+  return split[2]+'-'+split[1]+'-'+split[0]+time;
 }
 
 function sickbeardStatusLabel(text){
