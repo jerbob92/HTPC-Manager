@@ -61,8 +61,12 @@ function loadShow(tvdbid) {
             var img = $('<img>').attr('src', '/json/?which=sickbeard&action=getbanner&tvdbid=' + tvdbid).attr('style', 'max-width: 100%;');
             
             var content = $('<div>').append(img).append($('<hr />')).append(table);
-
-            showModal(data.show_name, content, {});
+            
+            showModal(data.show_name, content, {
+              Show: function(){
+                window.location = '/sickbeard/show/' + tvdbid;
+              }}
+            );
         }
     });
 }
