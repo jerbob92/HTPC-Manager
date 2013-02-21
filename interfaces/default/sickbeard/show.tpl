@@ -26,8 +26,9 @@
         <div id="notification_area"></div>
 
         <div class="row-fluid banner" style="background-image:url(/json/?which=sickbeard&action=getbanner&tvdbid=$show_id);">
-          <div class="span8"></div>
-          <div class="show_details span4">
+          <div class="span8" style="min-height: 0px;"></div>
+          <div class="show_details span4 pull-right">
+              <div id="show_details_top" class="span4"></div>
               <strong>Show details</strong>
                 <table class="table table-condensed">
                   <tr>
@@ -46,6 +47,7 @@
                    <td>Location</td><td class="sickbeard_location"/>
                   </tr>
                 </table>
+                <div id="show_details_bottom" class="span4"></div>
           </div>
         </div>
 
