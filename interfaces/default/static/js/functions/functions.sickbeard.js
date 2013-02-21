@@ -49,29 +49,14 @@ function loadShow(tvdbid) {
             var table = $('<table>');
             table.addClass('table table-bordered table-striped');
 
-            row = $('<tr>');
-            row.append('<th>Status</th><td>' + data.status + '</td>');
-            table.append(row);
-
-            row = $('<tr>');
-            row.append('<th>Airs</th><td>' + data.airs + '</td>');
-            table.append(row);
-
-            row = $('<tr>');
-            row.append('<th>Language</th><td>' + data.language + '</td>');
-            table.append(row);
-
-            row = $('<tr>');
-            row.append('<th>Location</th><td>' + data.location + '</td>');
-            table.append(row);
-
-            row = $('<tr>');
-            row.append('<th>Quality</th><td>' + data.quality + '</td>');
-            table.append(row);
-
-            row = $('<tr>');
-            row.append('<th>Network</th><td>' + data.network + '</td>');
-            table.append(row);
+            table.append(
+              $('<tr>').append('<th>Status</th>').append($('<td>').append(sickbeardStatusLabel(data.status, true))),
+              $('<tr>').append('<th>Airs</th><td>' + data.airs + '</td>'),
+              $('<tr>').append('<th>Language</th><td>' + data.language + '</td>'),
+              $('<tr>').append('<th>Location</th><td>' + data.location + '</td>'),
+              $('<tr>').append('<th>Quality</th><td>' + data.quality + '</td>'),
+              $('<tr>').append('<th>Network</th><td>' + data.network + '</td>')
+            );
             
             var img = $('<img>').attr('src', '/json/?which=sickbeard&action=getbanner&tvdbid=' + tvdbid).attr('style', 'max-width: 100%;');
             
@@ -285,6 +270,30 @@ function sickbeardStatusLabel(text){
     label.addClass('label-important');
   }
   
+  var icon = sickbeardStatusIcon(text, true);
+  label.prepend(' ').prepend(icon);
   return label;
 }
 
+function sickbeardStatusIcon(iconText, white){
+  var text =[
+    'Downloaded',
+    'Continuing',
+    'Snatched'
+  ];
+  var icons = [
+    'icon-download-alt',
+    'icon-refresh',
+    'icon-share-alt'
+  ];
+  
+  if (text.indexOf(iconText) != -1) {
+    var icon = $('<i>').addClass(icons[text.indexOf(iconText)]);
+    if (white == true) {
+      icon.addClass('icon-white');
+    }
+    return icon;
+  }
+  
+  return '';
+}
