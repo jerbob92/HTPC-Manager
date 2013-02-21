@@ -25,7 +25,7 @@ function loadShows() {
 
                 var row = $('<tr>')
                 row.append($('<td>').html(tvshow.show_name));
-                row.append($('<td>').html(tvshow.status));
+                row.append($('<td>').html(sickbeardStatusLabel(tvshow.status)));
                 row.append($('<td>').html(sickbeardFormatDate(tvshow.next_ep_airdate)));
                 row.append($('<td>').html(tvshow.network));
                 row.append($('<td>').html(tvshow.quality));
@@ -168,7 +168,7 @@ function loadSbHistory(limit) {
                 row.append($('<td>').html(tvshow.date));
                 row.append($('<td>').html(tvshow.show_name));
                 row.append($('<td>').html(tvshow.season + 'x' + tvshow.episode));
-                row.append($('<td>').html(tvshow.status));
+                row.append($('<td>').html(sickbeardStatusLabel(tvshow.status)));
                 row.append($('<td>').html(tvshow.quality));
 
                 $('#history_table_body').append(row);
@@ -265,5 +265,25 @@ function cancelAddShow() {
 function sickbeardFormatDate(inputDate){
   var split=inputDate.split('-');
   return split[2]+'-'+split[1]+'-'+split[0];
+}
+
+function sickbeardStatusLabel(text){
+  var statusOK = ['Continuing', 'Downloaded'];
+  var statusInfo = ['Snatched'];  
+  var statusError = ['Ended'];
+  
+  var label = $('<span>').addClass('label').text(text);
+  
+  if (statusOK.indexOf(text) != -1) {
+    label.addClass('label-success');
+  }
+  else if (statusInfo.indexOf(text) != -1) {
+    label.addClass('label-info');
+  }
+  else if (statusError.indexOf(text) != -1) {
+    label.addClass('label-important');
+  }
+  
+  return label;
 }
 

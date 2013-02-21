@@ -11,7 +11,7 @@ function loadShowData(showid){
       }
       data = data.data;
       $('.sickbeard_showname').html(data.show_name);
-      $('.sickbeard_status').html(data.status);
+      $('.sickbeard_status').html(sickbeardStatusLabel(data.status));
       $('.sickbeard_network').html(data.network);
       $('.sickbeard_location').html(data.location);
       $('.sickbeard_airs').html(data.airs);
