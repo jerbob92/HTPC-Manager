@@ -41,8 +41,9 @@ def xbmcGetThumb(thumb, thumbWidth, thumbHeight, thumbOpacity):
     # If there is no local copy
     if not os.path.isfile(thumbOnDisk):
         config = readSettings()
-        url = 'http://' + config.get('xbmc_ip') + ':' + str(config.get('xbmc_port')) + '/vfs/' + thumb
-
+        thumb = urllib.quote(thumb)
+        url = 'http://' + config.get('xbmc_ip') + ':' + str(config.get('xbmc_port')) + '/image/' + thumb
+        
         request = urllib2.Request(url)
         base64string = base64.encodestring('%s:%s' % (config.get('xbmc_username'), config.get('xbmc_password'))).replace('\n', '')
         request.add_header("Authorization", "Basic %s" % base64string)
